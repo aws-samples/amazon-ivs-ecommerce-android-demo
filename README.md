@@ -10,13 +10,11 @@ This is a server-less Android application that uses only TimedMetadata to show p
 
 This demo uses a 24/7 [looping stream](https://0e65d5729bda.us-west-2.playback.live-video.net/api/video/v1/us-west-2.484704431806.channel.qeejlweDQUeV.m3u8) which emits a TimedMetadata event every few seconds. These TimedMetadata events describe product information in json format, which is used by the app to show a carousel of products, and to highlight the product being shown on stream.
 
-For production applications, we recommend using TimedMetadata alongside services like [AWS Lambda](https://aws.amazon.com/lambda/), [Amazon API Gateway](https://aws.amazon.com/api-gateway/), and [Amazon DynamoDB](https://aws.amazon.com/dynamodb/). These services will let you store and retrieve product information in a more scalable way. See the [Amazon IVS eCommerce Web Demo](https://github.com/aws-samples/amazon-ivs-ecommerce-web-demo) for example code using these services.
-
 ## Getting Started
 
 To run this demo, you will need the following:<br>
 
-1. [Android Studio](https://apps.apple.com/us/app/xcode/id497799835), installed and up-to-date.
+1. [Android Studio](https://developer.android.com/studio), installed and up-to-date.
 2. An Android Virtual Device (AVD) Phone with **API level 23 or later** (Android 6.0). Learn more here: [Run apps on the Android Emulator](https://developer.android.com/studio/run/emulator).
 
 To run the demo in the Android emulator:
@@ -50,7 +48,7 @@ You should see the Android emulator boot up and launch the demo app. This may ta
 
 ### Using your own TimedMetadata events
 
-Amazon IVS TimedMetadata provides a way to embed metadata in an Amazon IVS stream. It ensures that your users receive the metadata at the same time as the video stream, regardless of stream latency or geographic location. Learn how to embed TimedMetadata in stream: [Embedding Metadata within a Video Stream](https://integ-docs-aws.amazon.com/ivs/latest/userguide/SEM.html).
+Amazon IVS TimedMetadata provides a way to embed metadata in an Amazon IVS stream. It ensures that your users receive the metadata at the same time as the video stream, regardless of stream latency or geographic location. Learn how to embed TimedMetadata in stream: [Embedding Metadata within a Video Stream](https://docs.aws.amazon.com/ivs/latest/userguide/SEM.html).
 
 This example expects an array of json that represents each product in the carousel. This approach is not recommended for production applications, given that it requires all product information to be contained in the stream's TimedMetadata. A more scalable approach using product indexes in TimedMetadata and [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) is documented in the [Amazon IVS eCommerce Web Demo](https://github.com/aws-samples/amazon-ivs-ecommerce-web-demo).
 
@@ -80,6 +78,10 @@ This example expects an array of json that represents each product in the carous
   ]
 }
 ```
+
+## Additional Notes
+
+For production applications, we recommend using TimedMetadata alongside services like [AWS Lambda](https://aws.amazon.com/lambda/), [Amazon API Gateway](https://aws.amazon.com/api-gateway/), and [Amazon DynamoDB](https://aws.amazon.com/dynamodb/). These services will let you store and retrieve product information in a more scalable way. See the [Amazon IVS eCommerce Web Demo](https://github.com/aws-samples/amazon-ivs-ecommerce-web-demo) for example code using these services.
 
 ## Documentation
 
