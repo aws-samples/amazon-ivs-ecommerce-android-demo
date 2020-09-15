@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="first"
+            type="Boolean" />
+
+        <variable
+            name="last"
+            type="Boolean" />
+
+        <variable
+            name="data"
+            type="com.amazonaws.ivs.player.ecommerce.models.ProductModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@{first ? @dimen/dimen_default : @dimen/dimen_default_small}"
+        android:paddingEnd="@{last ? @dimen/dimen_default : @dimen/dimen_default_small}"
+        tools:background="@color/colorBlack">
+
+        <TextView
+            android:id="@+id/stream_label"
+            android:layout_width="87dp"
+            android:layout_height="20dp"
+            android:background="@drawable/pill_on_stream"
+            android:gravity="center"
+            android:visibility="invisible"
+            app:changeVisibility="@{data.featured}"
+            app:layout_constraintStart_toStartOf="@+id/product_root_view"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/product_root_view"
+            android:layout_width="@dimen/product_view_width"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_default_small"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:cardPreventCornerOverlap="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stream_label">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/medium_text_size">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/preview_image_card"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+                    <ImageView
+                        android:id="@+id/preview_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/product_image_rounded_background"
+                        android:contentDescription="@null"
+                        app:loadImage="@{data.fullImageUrl}"
+                        tools:background="@color/colorGrey" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_default_medium"
+                    android:fontFamily="@font/dm_sans_bold"
+                    android:minLines="2"
+                    android:text="@{data.name}"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/medium_text_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/preview_image_card"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Eyeshadow Palette - Sublime" />
+
+                <TextView
+                    android:id="@+id/price_old"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_default_medium"
+                    android:fontFamily="@font/dm_sans_bold"
+                    android:text="@{data.priceOriginal}"
+                    android:textColor="@{data.hasDiscount() ? @color/colorGrey : @color/colorBlack}"
+                    android:textSize="@dimen/medium_text_size"
+                    app:layout_constraintBottom_toBottomOf="@+id/preview_image_card"
+                    app:layout_constraintStart_toEndOf="@+id/preview_image_card"
+                    app:layout_constraintTop_toBottomOf="@+id/title"
+                    app:strikeThrough="@{data.hasDiscount()}"
+                    tools:text="125$" />
+
+                <TextView
+                    android:id="@+id/price_new"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_default_small"
+                    android:fontFamily="@font/dm_sans_bold"
+                    android:text="@{data.priceDiscount}"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/medium_text_size"
+                    app:layout_constraintBottom_toBottomOf="@+id/preview_image_card"
+                    app:layout_constraintStart_toEndOf="@+id/price_old"
+                    app:layout_constraintTop_toBottomOf="@+id/title"
+                    tools:text="99$" />
+
+                <Button
+                    android:id="@+id/btn_learn_more"
+                    style="@style/HoverEffect"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_marginTop="@dimen/dimen_default_medium"
+                    android:layout_marginEnd="@dimen/dimen_default_small"
+                    android:background="@drawable/rounded_grey_button_background"
+                    android:fontFamily="@font/dm_sans_medium"
+                    android:gravity="center"
+                    android:text="@string/txt_learn_more"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorBlack"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline"
+                    app:layout_constraintStart_toStartOf="@+id/preview_image_card"
+                    app:layout_constraintTop_toBottomOf="@+id/preview_image_card" />
+
+                <Button
+                    android:id="@+id/btn_buy_now"
+                    style="@style/HoverEffect"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_marginStart="@dimen/dimen_default_small"
+                    android:background="@drawable/rounded_black_button_background"
+                    android:fontFamily="@font/dm_sans_bold"
+                    android:gravity="center"
+                    android:text="@string/txt_buy_now"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorWhite"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_learn_more"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/dimen_default_medium"
+            android:paddingBottom="@dimen/dimen_default"
+            app:layout_constraintStart_toStartOf="@+id/product_root_view"
+            app:layout_constraintTop_toBottomOf="@+id/product_root_view">
+
+            <ImageView
+                android:id="@+id/purchaser_avatar"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:contentDescription="@null"
+                app:loadImage="@{data.lastPurchaser.fullUserUrl}"
+                tools:background="@color/colorGrey" />
+
+            <TextView
+                android:id="@+id/purchaser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/dimen_default_medium"
+                android:fontFamily="@font/dm_sans_bold"
+                android:text="@{data.lastPurchaser.username}"
+                android:textColor="@color/colorWhite"
+                tools:text="teodore" />
+
+            <TextView
+                android:id="@+id/purchased_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/dimen_default_small"
+                android:fontFamily="@font/dm_sans_regular"
+                android:text="@string/txt_purchased"
+                android:textColor="@color/colorWhite"
+                tools:text="purchased now" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

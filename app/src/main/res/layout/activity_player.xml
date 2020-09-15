@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="data"
+            type="com.amazonaws.ivs.player.ecommerce.viewModels.WatchViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBlack"
+        android:keepScreenOn="true"
+        tools:context=".activities.MainActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/player_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBlack"
+            android:keepScreenOn="true">
+
+            <ImageView
+                android:id="@+id/background_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                android:visibility="invisible" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorOverlay" />
+
+            <SurfaceView
+                android:id="@+id/surface_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/pb_buffering"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:scaleType="center"
+                android:visibility="@{data.buffering ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
+            <View
+                android:id="@+id/controls_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/player_controls_background"
+                app:changeVisibility="@{data.showControls}" />
+
+            <include
+                android:id="@+id/title_view"
+                layout="@layout/player_title_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:slideTop="@{data.showControls}" />
+
+            <TextView
+                android:id="@+id/close_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="@dimen/dimen_default"
+                android:background="@{data.showControls || data.isLandscape ? @drawable/ic_close_white : @drawable/ic_close_black}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/product_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="@id/placeholder_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:itemCount="3"
+            tools:listitem="@layout/player_product_item" />
+
+        <!--Product placeholder view (product collapse)-->
+        <View
+            android:id="@+id/placeholder_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/placeholder_normal_height"
+            app:changeHeight="@{data.showControls}"
+            app:layout_constraintTop_toBottomOf="@id/player_view" />
+
+        <!--Product gradient overlay view-->
+        <View
+            android:id="@+id/overlay_view"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/product_gradient_overlay_background"
+            android:visibility="invisible"
+            app:fadeAnimation="@{data.showControls}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

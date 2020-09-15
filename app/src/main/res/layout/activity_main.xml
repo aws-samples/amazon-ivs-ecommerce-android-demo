@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_default"
+        android:layout_marginEnd="@dimen/dimen_default"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/dimen_default_medium"
+        android:paddingBottom="@dimen/dimen_default_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/more_button"
+            android:layout_width="@dimen/toolbar_button_dimen"
+            android:layout_height="@dimen/toolbar_button_dimen"
+            android:layout_gravity="center"
+            android:background="@drawable/menu" />
+
+        <EditText
+            android:id="@+id/search_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_default"
+            android:layout_marginEnd="@dimen/dimen_default"
+            android:layout_weight="1"
+            android:autofillHints="@null"
+            android:background="@drawable/rounded_search_background"
+            android:fontFamily="@font/dm_sans_regular"
+            android:gravity="center"
+            android:hint="@string/search_hint"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="5dp"
+            android:textColorHint="@color/colorGrey" />
+
+        <TextView
+            android:id="@+id/cart_button"
+            android:layout_width="@dimen/toolbar_button_dimen"
+            android:layout_height="@dimen/toolbar_button_dimen"
+            android:layout_gravity="center"
+            android:background="@drawable/custom_cart" />
+
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_toolbar"
+        android:background="@color/colorWhite"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".activities.MainActivity">
+
+            <ImageView
+                android:id="@+id/home_banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:contentDescription="@null"
+                android:padding="@dimen/dimen_default"
+                android:src="@drawable/banner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/learn_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_default_medium"
+                android:fontFamily="@font/dm_sans_bold"
+                android:gravity="center"
+                android:text="@string/main_learn_message"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/big_text_size"
+                app:layout_constraintTop_toBottomOf="@+id/home_banner" />
+
+            <TextView
+                android:id="@+id/tips_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:gravity="center"
+                android:text="@string/main_tips_message"
+                android:textColor="@color/colorBlack"
+                app:layout_constraintTop_toBottomOf="@+id/learn_message" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_streams"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_default_medium"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/tips_message"
+                tools:itemCount="4"
+                tools:listitem="@layout/stream_item" />
+
+            <TextView
+                android:id="@+id/offers_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_default_medium"
+                android:fontFamily="@font/dm_sans_bold"
+                android:gravity="center"
+                android:text="@string/main_offers_message"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/big_text_size"
+                app:layout_constraintTop_toBottomOf="@+id/rv_streams" />
+
+            <TextView
+                android:id="@+id/countdown_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/small_text_size"
+                android:fontFamily="@font/dm_sans_medium"
+                android:paddingStart="2dp"
+                android:paddingEnd="2dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/offers_message"
+                tools:text="10:32:18" />
+
+            <LinearLayout
+                android:id="@+id/offer_holder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/dimen_default_medium"
+                app:layout_constraintTop_toBottomOf="@id/countdown_view">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_default_medium"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@null"
+                    android:src="@drawable/product_main_0" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_default_medium"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@null"
+                    android:src="@drawable/product_main_1" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_default_medium"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@null"
+                    android:src="@drawable/product_main_2" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</RelativeLayout>

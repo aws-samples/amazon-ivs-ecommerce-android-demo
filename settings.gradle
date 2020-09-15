@@ -1,0 +1,4 @@
+include ':library-release'
+include ':library-debug'
+rootProject.name='eCommerce'
+include ':app'
