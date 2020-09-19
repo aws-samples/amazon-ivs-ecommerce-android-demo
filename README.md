@@ -25,7 +25,7 @@ To run the demo in the Android emulator:
 4. Select an Android Virtual Device with API level 23 or later.
 5. Choose `Run app` in the toolbar, or press `Ctrl-R`.
 
-You should see the Android emulator boot up and launch the demo app. This may take a few moments to complete. Once the app is launched in the simulator, tap on one of the images in the `LIVE` carousel top open a video. There are both portrait and landscape video examples in the app.
+You should see the Android emulator boot up and launch the demo app. This may take a few moments to complete. Once the app is launched in the simulator, tap on one of the images in the `LIVE` carousel to open a video. There are both portrait and landscape video examples in the app.
 
 - To view a portrait stream: Tap the leftmost image in the carousel.
 - To view a landscape stream: Tap the second-to-leftmost image in the carousel.
