@@ -1,9 +1,11 @@
 package com.amazonaws.ivs.player.ecommerce.models
 
 import com.amazonaws.ivs.player.ecommerce.common.Configuration
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class ProductModel(
-    val id: String,
+    val id: Int,
     val priceDiscount: String,
     val priceOriginal: String,
     val imageUrl: String,
