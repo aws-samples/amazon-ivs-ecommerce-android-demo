@@ -1,21 +1,52 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/secondary_orange_color</item>
     </style>
 
     <style name="HoverTheme">
-        <item name="colorControlActivated">@color/colorHover</item>
-        <item name="colorControlHighlight">@color/colorHover</item>
+        <item name="colorControlActivated">@color/primary_orange_color</item>
+        <item name="colorControlHighlight">@color/primary_orange_color</item>
     </style>
 
     <style name="HoverEffect" parent="Widget.AppCompat.Button.Borderless">
         <item name="android:theme">@style/HoverTheme</item>
         <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
+    </style>
+
+    <!-- Alert dialog -->
+    <style name="AlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="android:background">@color/alert_dialog_background</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/AlertTitle</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/AlertBody</item>
+        <item name="buttonBarPositiveButtonStyle">@style/AlertPositiveButton</item>
+    </style>
+
+    <style name="AlertTitle" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textColor">@color/primary_text_color</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:theme">@style/DialogTextStyle</item>
+    </style>
+
+    <style name="AlertBody" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+        <item name="android:textColor">@color/secondary_text_color</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="AlertPositiveButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/primary_text_color</item>
+        <item name="rippleColor">@color/secondary_text_color</item>
+    </style>
+
+    <style name="DialogTextStyle" parent="">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/secondary_text_color</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:lineSpacingMultiplier">1.30</item>
     </style>
 
 </resources>

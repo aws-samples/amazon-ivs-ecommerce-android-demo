@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">eCommerce</string>
-    <string name="dialog_ok">OK</string>
-    <string name="error_happened_template">Error happened (Code - %1$s)</string>
 
     <string name="live_status_message">LIVE</string>
     <string name="txt_learn_more">Learn More</string>
@@ -16,4 +14,7 @@
     <string name="txt_product_details">Description of the product listed above. For example something like this: By combining potent natural ingredients, ancient rituals, and modern science, Fresh creates products that perform with experiences that transform.\nDiscovery drives innovation.</string>
     <string name="txt_details_button">$99 ● Buy Now</string>
     <string name="txt_purchased">purchased now</string>
+    <string name="error">Error</string>
+    <string name="error_dialog_message">We\'re sorry, but something went wrong. Please try again.</string>
+    <string name="close">Close</string>
 </resources>
