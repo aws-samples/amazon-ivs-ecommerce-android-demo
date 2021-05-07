@@ -1,17 +1,18 @@
 package com.amazonaws.ivs.player.ecommerce.common
 
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.amazonaws.ivs.player.ecommerce.App
 
-inline fun <reified T : ViewModel> lazyViewModel(
-    noinline owner: (() -> App),
-    noinline creator: (() -> T)? = null
-) = lazy {
-    if (creator == null)
-        ViewModelProvider(owner()).get(T::class.java)
+inline fun <reified T : ViewModel> FragmentActivity.getViewModel(noinline creator: (() -> T)? = null): T {
+    return if (creator == null)
+        ViewModelProvider(this).get(T::class.java)
     else
-        ViewModelProvider(owner(), BaseViewModelFactory(creator)).get(T::class.java)
+        ViewModelProvider(this, BaseViewModelFactory(creator)).get(T::class.java)
+}
+
+inline fun <reified T : ViewModel> FragmentActivity.lazyViewModel(noinline creator: (() -> T)? = null) = lazy {
+    getViewModel(creator)
 }
 
 class BaseViewModelFactory<T>(val creator: () -> T) : ViewModelProvider.Factory {

@@ -1,48 +1,52 @@
 package com.amazonaws.ivs.player.ecommerce.viewModels
 
-import android.content.Context
+import android.app.Application
 import android.net.Uri
+import android.util.Log
 import android.view.Surface
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.amazonaws.ivs.player.MediaPlayer
 import com.amazonaws.ivs.player.MediaType
 import com.amazonaws.ivs.player.Player
-import com.amazonaws.ivs.player.ecommerce.common.ConsumableLiveData
-import com.amazonaws.ivs.player.ecommerce.common.asObject
+import com.amazonaws.ivs.player.ecommerce.common.Configuration.TAG
 import com.amazonaws.ivs.player.ecommerce.common.setListener
 import com.amazonaws.ivs.player.ecommerce.models.MetadataModel
 import com.amazonaws.ivs.player.ecommerce.models.ProductModel
-import timber.log.Timber
+import com.google.gson.Gson
 
-class WatchViewModel : ViewModel() {
+class WatchViewModel(private val context: Application) : ViewModel() {
 
     private var player: MediaPlayer? = null
     private var playerListener: Player.Listener? = null
 
-    var url: String? = null
+    val url = MutableLiveData<String>()
     val buffering = MutableLiveData<Boolean>()
     val playerParamsChanged = MutableLiveData<Pair<Int, Int>>()
-    val errorHappened = ConsumableLiveData<Pair<String, String>>()
+    val errorHappened = MutableLiveData<Pair<String, String>>()
     val products = MutableLiveData<List<ProductModel>>()
     val showControls = MutableLiveData<Boolean>()
     val enableAutoScroll = MutableLiveData<Boolean>()
     val isPlaying = MutableLiveData<Boolean>()
     val isLandscape = MutableLiveData<Boolean>()
 
-    fun initPlayer(context: Context) {
+    init {
         showControls.value = true
+        initPlayer()
+    }
+
+    private fun initPlayer() {
         // Media player initialization
         player = MediaPlayer(context)
 
         player?.setListener(
             onVideoSizeChanged = { width, height ->
-                Timber.d("Video size changed: $width $height")
+                Log.d(TAG, "Video size changed: $width $height")
                 isLandscape.value = width >= height
                 playerParamsChanged.value = Pair(width, height)
             },
             onStateChanged = { state ->
-                Timber.d("State changed: $state")
+                Log.d(TAG, "State changed: $state")
                 when (state) {
                     Player.State.BUFFERING -> {
                         buffering.value = true
@@ -59,55 +63,59 @@ class WatchViewModel : ViewModel() {
             onMetadata = { data, buffer ->
                 if (MediaType.TEXT_PLAIN == data) {
                     try {
-                        products.value = String(buffer.array(), Charsets.UTF_8)
-                            .asObject<MetadataModel>()
-                            .products
+                        // Get question data item from buffer
+                        val metadataModel = Gson().fromJson(
+                            String(buffer.array(), Charsets.UTF_8),
+                            MetadataModel::class.java
+                        )
+                        products.value = metadataModel.products
+                        Log.d(TAG, "Received product data: $metadataModel")
                     } catch (exception: Exception) {
-                        Timber.d("Error happened: $exception")
+                        Log.d(TAG, "Error happened: $exception")
                     }
                 }
             },
             onError = { exception ->
-                Timber.d("Error happened: $exception")
-                errorHappened.postConsumable(Pair(exception.code.toString(), exception.errorMessage))
+                Log.d(TAG, "Error happened: $exception")
+                errorHappened.value = Pair(exception.code.toString(), exception.errorMessage)
             }
         )
     }
 
     private fun playerLoadStream(uri: Uri) {
-        Timber.d("Loading stream URI: $uri")
+        Log.d(TAG, "Loading stream URI: $uri")
         // Loads the specified stream
         player?.load(uri)
         player?.play()
     }
 
     fun playerStart(surface: Surface) {
-        Timber.d("Starting player")
+        Log.d(TAG, "Starting player")
         updateSurface(surface)
-        playerLoadStream(Uri.parse(url))
+        playerLoadStream(Uri.parse(url.value))
         play()
     }
 
     fun updateSurface(surface: Surface?) {
-        Timber.d("Updating player surface: $surface")
+        Log.d(TAG, "Updating player surface: $surface")
         // Sets the Surface to use for rendering video
         player?.setSurface(surface)
     }
 
     fun play() {
-        Timber.d("Starting playback")
+        Log.d(TAG, "Starting playback")
         // Starts or resumes playback of the stream.
         player?.play()
     }
 
     fun pause() {
-        Timber.d("Pausing playback")
+        Log.d(TAG, "Pausing playback")
         // Pauses playback of the stream.
         player?.pause()
     }
 
     fun release() {
-        Timber.d("Releasing player")
+        Log.d(TAG, "Releasing player")
         // Removes a playback state listener
         playerListener?.let { player?.removeListener(it) }
         // Releases the player instance
@@ -118,4 +126,5 @@ class WatchViewModel : ViewModel() {
     fun showControls() {
         showControls.value = showControls.value != true
     }
+
 }

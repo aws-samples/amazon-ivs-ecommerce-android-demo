@@ -10,16 +10,16 @@ import java.nio.ByteBuffer
  * Player listener extension function
  */
 inline fun Player.setListener(
-    crossinline onAnalyticsEvent: (key: String, value: String) -> Unit = { _,_ -> },
+    crossinline onAnalyticsEvent: (key: String, value: String) -> Unit = { _,_ -> Unit },
     crossinline onRebuffering: () -> Unit = {},
-    crossinline onSeekCompleted: (value: Long) -> Unit = { _ -> },
-    crossinline onQualityChanged: (quality: Quality) -> Unit = { _ -> },
-    crossinline onVideoSizeChanged: (width: Int, height: Int) -> Unit = { _,_ -> },
-    crossinline onCue: (cue: Cue) -> Unit = { _ -> },
-    crossinline onDurationChanged: (duration: Long) -> Unit = { _ -> },
-    crossinline onStateChanged: (state: Player.State) -> Unit = { _ -> },
-    crossinline onError: (exception: PlayerException) -> Unit = { _ -> },
-    crossinline onMetadata: (data: String, buffer: ByteBuffer) -> Unit = { _, _ -> }
+    crossinline onSeekCompleted: (value: Long) -> Unit = { _ -> Unit },
+    crossinline onQualityChanged: (quality: Quality) -> Unit = { _ -> Unit },
+    crossinline onVideoSizeChanged: (width: Int, height: Int) -> Unit = { _,_ -> Unit },
+    crossinline onCue: (cue: Cue) -> Unit = { _ -> Unit },
+    crossinline onDurationChanged: (duration: Long) -> Unit = { _ -> Unit },
+    crossinline onStateChanged: (state: Player.State) -> Unit = { _ -> Unit },
+    crossinline onError: (exception: PlayerException) -> Unit = { _ -> Unit },
+    crossinline onMetadata: (data: String, buffer: ByteBuffer) -> Unit = { _,_ -> Unit }
 ): Player.Listener {
     val listener = playerListener(
         onAnalyticsEvent, onRebuffering, onSeekCompleted, onQualityChanged, onVideoSizeChanged,
@@ -30,17 +30,20 @@ inline fun Player.setListener(
     return listener
 }
 
+/**
+ * Player.Listener provides an implementation of this interface to addListener(Listener) to receive events from a Player instance.
+ */
 inline fun playerListener(
-    crossinline onAnalyticsEvent: (key: String, value: String) -> Unit = { _,_ -> },
+    crossinline onAnalyticsEvent: (key: String, value: String) -> Unit = { _,_ -> Unit },
     crossinline onRebuffering: () -> Unit = {},
-    crossinline onSeekCompleted: (value: Long) -> Unit = { _ -> },
-    crossinline onQualityChanged: (quality: Quality) -> Unit = { _ -> },
-    crossinline onVideoSizeChanged: (width: Int, height: Int) -> Unit = { _,_ -> },
-    crossinline onCue: (cue: Cue) -> Unit = { _ -> },
-    crossinline onDurationChanged: (duration: Long) -> Unit = { _ -> },
-    crossinline onStateChanged: (state: Player.State) -> Unit = { _ -> },
-    crossinline onError: (exception: PlayerException) -> Unit = { _ -> },
-    crossinline onMetadata: (data: String, buffer: ByteBuffer) -> Unit = { _, _ -> }
+    crossinline onSeekCompleted: (value: Long) -> Unit = { _ -> Unit },
+    crossinline onQualityChanged: (quality: Quality) -> Unit = { _ -> Unit },
+    crossinline onVideoSizeChanged: (width: Int, height: Int) -> Unit = { _,_ -> Unit },
+    crossinline onCue: (cue: Cue) -> Unit = { _ -> Unit },
+    crossinline onDurationChanged: (duration: Long) -> Unit = { _ -> Unit },
+    crossinline onStateChanged: (state: Player.State) -> Unit = { _ -> Unit },
+    crossinline onError: (exception: PlayerException) -> Unit = { _ -> Unit },
+    crossinline onMetadata: (data: String, buffer: ByteBuffer) -> Unit = { _,_ -> Unit }
 ): Player.Listener = object : Player.Listener() {
     // Indicates that a video analytics tracking event occurred.
     override fun onAnalyticsEvent(key: String, value: String) = onAnalyticsEvent(key, value)
