@@ -1,0 +1,36 @@
+def appCompatVersion = '1.1.0'
+def coreVersion = '1.3.0'
+def constraintLayoutVersion = '1.1.3'
+def materialDesignVersion = '1.1.0'
+def recyclerViewVersion = '1.1.0'
+def cardViewVersion = '1.0.0'
+def lifecycleVersion = '2.2.0'
+def gsonVersion = '2.8.6'
+def picassoVersion = '2.71828'
+
+dependencies {
+
+    // Libraries
+    implementation 'com.amazonaws:ivs-player:1.0.0'
+
+    // Material design
+    implementation "com.google.android.material:material:$materialDesignVersion"
+
+    // Android
+    implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
+    implementation "androidx.cardview:cardview:$cardViewVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+
+    // Gson
+    implementation "com.google.code.gson:gson:$gsonVersion"
+
+    // Picasso
+    implementation "com.squareup.picasso:picasso:$picassoVersion"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    implementation "androidx.core:core-ktx:$coreVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+}

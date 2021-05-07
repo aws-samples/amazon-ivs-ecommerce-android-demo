@@ -4,6 +4,7 @@ import com.amazonaws.ivs.player.ecommerce.R
 import com.amazonaws.ivs.player.ecommerce.models.LiveStreamItem
 
 object Configuration {
+    const val TAG = "eCommerce"
     private const val LINK_PORTRAIT = "https://4da4a22026d3.us-west-2.playback.live-video.net/api/video/v1/us-west-2.298083573632.channel.WbhDQYgfYHoT.m3u8"
     private const val LINK_LANDSCAPE = "https://4da4a22026d3.us-west-2.playback.live-video.net/api/video/v1/us-west-2.298083573632.channel.JQj8mTBfhb7e.m3u8"
     const val BASE_URL = "https://assets.codepen.io/2960061" // Base URL prepended to images sent over metadata

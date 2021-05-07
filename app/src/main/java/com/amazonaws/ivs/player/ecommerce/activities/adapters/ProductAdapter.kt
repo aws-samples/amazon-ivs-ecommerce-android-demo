@@ -18,7 +18,7 @@ class ProductAdapter(private val onLearnMoreClick: (position: Int) -> Unit) :
         DiffUtil.calculateDiff(SourceOptionDiff(old, new)).dispatchUpdatesTo(this)
     }
 
-    fun getFeaturedPosition(): Int = items.indexOf(items.find { it.isFeatured })
+    fun getFeaturedPosition(): Int? = items.indexOf(items.find { it.isFeatured })
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =

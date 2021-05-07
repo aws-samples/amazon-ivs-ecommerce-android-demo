@@ -4,9 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Point
-import android.os.Build
 import android.os.Handler
-import android.os.Looper
 import android.renderscript.Allocation
 import android.renderscript.Element
 import android.renderscript.RenderScript
@@ -16,40 +14,35 @@ import android.view.SurfaceView
 import android.view.View
 import android.view.WindowManager
 import androidx.annotation.WorkerThread
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.amazonaws.ivs.player.ecommerce.R
-import com.amazonaws.ivs.player.ecommerce.databinding.ActivityPlayerBinding
+import kotlinx.android.synthetic.main.activity_player.*
 import kotlinx.coroutines.delay
-import timber.log.Timber
 
 /**
  * Blurred background
  * implemented using PixelCopy (API > 24)
  */
-suspend fun Activity.initBlurredBackground(binding: ActivityPlayerBinding) {
+suspend fun Activity.initBlurredBackground() {
     delay(Configuration.BACKGROUND_DELAY)
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
         runOnUiThread {
-            if (binding.surfaceView.holder.surface.isValid) {
+            if (surface_view.holder.surface.isValid) {
                 val surfaceBitmap =
-                    Bitmap.createBitmap(binding.surfaceView.width, binding.surfaceView.height, Bitmap.Config.ARGB_8888)
+                    Bitmap.createBitmap(surface_view.width, surface_view.height, Bitmap.Config.ARGB_8888)
 
                 // PixelCopy provides a mechanisms to issue pixel copy requests to allow for copy operations from Surface to Bitmap
                 PixelCopy.request(
-                    binding.surfaceView,
+                    surface_view,
                     surfaceBitmap,
                     {
                         if (it == PixelCopy.SUCCESS) {
-                            val scaledBitmap = surfaceBitmap.scaleBitmap(
-                                binding.backgroundView.width,
-                                binding.backgroundView.height
-                            )
+                            val scaledBitmap = surfaceBitmap.scaleBitmap(background_view.width, background_view.height)
                             val blurredBitmap = scaledBitmap.blurBitmap(applicationContext)
-                            binding.backgroundView.setImageBitmap(blurredBitmap)
-                            binding.backgroundView.fadeIn()
+                            background_view.setImageBitmap(blurredBitmap)
+                            background_view.fadeIn()
                         }
                     },
-                    Handler(Looper.getMainLooper())
+                    Handler()
                 )
             }
         }
@@ -120,37 +113,31 @@ fun Bitmap.scaleBitmap(maxWidth: Int, maxHeight: Int): Bitmap {
 }
 
 /**
+ * Surface view width/height scaling
+ * @param windowManager window manager
+ * @param width video width
+ * @param height video height
+ */
+fun SurfaceView.setPortraitDimens(windowManager: WindowManager, width: Int, height: Int) {
+    val point = Point()
+    windowManager.defaultDisplay.getSize(point)
+    val aspectRatio = width.toFloat() / height.toFloat()
+    val portraitWidth = point.y * aspectRatio
+    if (portraitWidth >= point.x) {
+        layoutParams.width = portraitWidth.toInt()
+        layoutParams.height = point.y
+    } else {
+        val portraitHeight = point.x / aspectRatio
+        layoutParams.width = point.x
+        layoutParams.height = portraitHeight.toInt()
+    }
+}
+
+/**
  * Height change animation for product placeholder view
  */
 fun View.animatePlaceholderHeight(collapse: Boolean) {
     val normalHeight = context.resources.getDimension(R.dimen.placeholder_normal_height).toInt()
     val expandedHeight = context.resources.getDimension(R.dimen.placeholder_expanded_height).toInt()
     animateHeight(collapse, normalHeight, expandedHeight)
-}
-
-fun SurfaceView.zoomToFit(windowManager: WindowManager, videoWidth: Int, videoHeight: Int) {
-    val point = Point()
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-        context.display?.getRealSize(point)
-    } else {
-        @Suppress("DEPRECATION")
-        windowManager.defaultDisplay.getSize(point)
-    }
-    val size = calculateSurfaceSize(point.x, point.y, videoWidth, videoHeight)
-    Timber.d("Calculated: ${size.first} ${size.second}")
-    layoutParams = ConstraintLayout.LayoutParams(size.first, size.second)
-}
-
-fun calculateSurfaceSize(surfaceWidth: Int, surfaceHeight: Int, videoWidth: Int, videoHeight: Int): Pair<Int, Int> {
-    val ratioHeight = videoHeight.toFloat() / videoWidth.toFloat()
-    val ratioWidth = videoWidth.toFloat() / videoHeight.toFloat()
-    val isPortrait = videoWidth < videoHeight
-    val calculatedHeight = if (isPortrait) (surfaceWidth / ratioWidth).toInt() else (surfaceWidth * ratioHeight).toInt()
-    val calculatedWidth = if (isPortrait) (surfaceHeight / ratioHeight).toInt() else (surfaceHeight * ratioWidth).toInt()
-    Timber.d("CALCULATED: ($surfaceWidth, $calculatedHeight) OR ($calculatedWidth, $surfaceHeight) FOR SURFACE: ($surfaceWidth, $surfaceHeight), VIDEO: ($videoWidth, $videoHeight)")
-    return if (calculatedWidth >= surfaceWidth) {
-        Pair(calculatedWidth, surfaceHeight)
-    } else {
-        Pair(surfaceWidth, calculatedHeight)
-    }
 }

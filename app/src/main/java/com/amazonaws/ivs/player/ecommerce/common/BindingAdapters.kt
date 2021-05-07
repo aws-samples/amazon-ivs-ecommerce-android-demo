@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
 
 object BindingAdapters {
 
@@ -26,6 +26,16 @@ object BindingAdapters {
             view.fadeIn()
         } else {
             view.fadeOut()
+        }
+    }
+
+    @BindingAdapter("slideTop")
+    @JvmStatic
+    fun setSlideTop(view: View, value: Boolean) {
+        if (value) {
+            view.slideUpFadeIn(true)
+        } else {
+            view.slideDownFadeOut(true)
         }
     }
 
@@ -54,6 +64,7 @@ object BindingAdapters {
     @BindingAdapter("loadImage")
     @JvmStatic
     fun setImage(view: ImageView, url: String) {
-        Glide.with(view.context).load(url).into(view)
+        Picasso.get().load(url).into(view)
     }
+
 }
