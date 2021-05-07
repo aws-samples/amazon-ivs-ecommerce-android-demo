@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="@{first ? @dimen/dimen_default : @dimen/dimen_default_small}"
         android:paddingEnd="@{last ? @dimen/dimen_default : @dimen/dimen_default_small}"
-        tools:background="@color/colorBlack">
+        tools:background="@color/black_color">
 
         <TextView
             android:id="@+id/stream_label"
@@ -44,6 +44,7 @@
             android:layout_width="@dimen/product_view_width"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dimen_default_small"
+            app:cardBackgroundColor="@color/white_color"
             app:cardCornerRadius="10dp"
             app:cardElevation="5dp"
             app:cardPreventCornerOverlap="true"
@@ -63,6 +64,7 @@
                     app:cardElevation="0dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
+
                     <ImageView
                         android:id="@+id/preview_image"
                         android:layout_width="match_parent"
@@ -70,7 +72,8 @@
                         android:background="@drawable/product_image_rounded_background"
                         android:contentDescription="@null"
                         app:loadImage="@{data.fullImageUrl}"
-                        tools:background="@color/colorGrey" />
+                        tools:background="@color/secondary_grey_color" />
+
                 </androidx.cardview.widget.CardView>
 
                 <TextView
@@ -81,7 +84,7 @@
                     android:fontFamily="@font/dm_sans_bold"
                     android:minLines="2"
                     android:text="@{data.name}"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/black_color"
                     android:textSize="@dimen/medium_text_size"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/preview_image_card"
@@ -95,7 +98,7 @@
                     android:layout_marginStart="@dimen/dimen_default_medium"
                     android:fontFamily="@font/dm_sans_bold"
                     android:text="@{data.priceOriginal}"
-                    android:textColor="@{data.hasDiscount() ? @color/colorGrey : @color/colorBlack}"
+                    android:textColor="@{data.hasDiscount() ? @color/secondary_grey_color : @color/black_color}"
                     android:textSize="@dimen/medium_text_size"
                     app:layout_constraintBottom_toBottomOf="@+id/preview_image_card"
                     app:layout_constraintStart_toEndOf="@+id/preview_image_card"
@@ -110,16 +113,15 @@
                     android:layout_marginStart="@dimen/dimen_default_small"
                     android:fontFamily="@font/dm_sans_bold"
                     android:text="@{data.priceDiscount}"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/black_color"
                     android:textSize="@dimen/medium_text_size"
                     app:layout_constraintBottom_toBottomOf="@+id/preview_image_card"
                     app:layout_constraintStart_toEndOf="@+id/price_old"
                     app:layout_constraintTop_toBottomOf="@+id/title"
                     tools:text="99$" />
 
-                <Button
+                <android.widget.Button
                     android:id="@+id/btn_learn_more"
-                    style="@style/HoverEffect"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/button_height"
                     android:layout_marginTop="@dimen/dimen_default_medium"
@@ -129,14 +131,13 @@
                     android:gravity="center"
                     android:text="@string/txt_learn_more"
                     android:textAllCaps="false"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/black_color"
                     app:layout_constraintEnd_toStartOf="@+id/guideline"
                     app:layout_constraintStart_toStartOf="@+id/preview_image_card"
                     app:layout_constraintTop_toBottomOf="@+id/preview_image_card" />
 
-                <Button
+                <android.widget.Button
                     android:id="@+id/btn_buy_now"
-                    style="@style/HoverEffect"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/button_height"
                     android:layout_marginStart="@dimen/dimen_default_small"
@@ -145,7 +146,7 @@
                     android:gravity="center"
                     android:text="@string/txt_buy_now"
                     android:textAllCaps="false"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/white_color"
                     app:layout_constraintBottom_toBottomOf="@+id/btn_learn_more"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline" />
@@ -177,7 +178,7 @@
                 android:layout_height="25dp"
                 android:contentDescription="@null"
                 app:loadImage="@{data.lastPurchaser.fullUserUrl}"
-                tools:background="@color/colorGrey" />
+                tools:background="@color/secondary_grey_color" />
 
             <TextView
                 android:id="@+id/purchaser"
@@ -187,7 +188,7 @@
                 android:layout_marginStart="@dimen/dimen_default_medium"
                 android:fontFamily="@font/dm_sans_bold"
                 android:text="@{data.lastPurchaser.username}"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/white_color"
                 tools:text="teodore" />
 
             <TextView
@@ -198,10 +199,11 @@
                 android:layout_marginStart="@dimen/dimen_default_small"
                 android:fontFamily="@font/dm_sans_regular"
                 android:text="@string/txt_purchased"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/white_color"
                 tools:text="purchased now" />
 
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
