@@ -21,7 +21,7 @@ import com.amazonaws.ivs.player.ecommerce.viewModels.WatchViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import timber.log.Timber
 
-class WatchActivity : AppCompatActivity() {
+class PlayerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPlayerBinding
     private val detailsDialog: BottomSheetBehavior<RelativeLayout> by lazy {
@@ -89,7 +89,7 @@ class WatchActivity : AppCompatActivity() {
             }
         })
 
-        viewModel.errorHappened.observe(this, {
+        viewModel.errorHappened.observeConsumable(this, {
             Timber.d("Error dialog is shown")
             showErrorDialog()
         })
@@ -137,6 +137,10 @@ class WatchActivity : AppCompatActivity() {
                     }
                 }
             })
+        }
+
+        binding.closeButton.setOnClickListener {
+            onBackPressed()
         }
 
         binding.rootView.setOnClickListener {

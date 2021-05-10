@@ -54,12 +54,15 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/medium_text_size">
+                android:background="@color/white_color"
+                android:clipToPadding="false"
+                android:padding="16dp">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/preview_image_card"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
+                    app:cardBackgroundColor="@color/white_color"
                     app:cardCornerRadius="5dp"
                     app:cardElevation="0dp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -120,7 +123,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/title"
                     tools:text="99$" />
 
-                <android.widget.Button
+                <TextView
                     android:id="@+id/btn_learn_more"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/button_height"
@@ -136,7 +139,7 @@
                     app:layout_constraintStart_toStartOf="@+id/preview_image_card"
                     app:layout_constraintTop_toBottomOf="@+id/preview_image_card" />
 
-                <android.widget.Button
+                <TextView
                     android:id="@+id/btn_buy_now"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/button_height"

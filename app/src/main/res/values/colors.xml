@@ -12,6 +12,7 @@
     <color name="red_accent_color">#FF0000</color>
     <color name="transparent_color">#00000000</color>
     <color name="overlay_color">#80000000</color>
+    <color name="gradient_color">#66000000</color>
     <color name="gradient_overlay_color">#CC000000</color>
     <color name="alert_dialog_background">#4C4E53</color>
     <color name="primary_text_color">#FFFFFF</color>

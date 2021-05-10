@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:background="@color/color_background"
             android:keepScreenOn="true"
-            tools:context="com.amazon.ivs.player.demoapps.ecommerce.MainActivity">
+            tools:context=".activities.MainActivity">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/player_view"
@@ -72,14 +72,30 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:visibility="visible" />
 
+                <View
+                    android:id="@+id/controls_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/player_controls_background"
+                    app:changeVisibility="@{data.showControls}" />
+
                 <include
                     android:id="@+id/title_view"
                     layout="@layout/player_title_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:isVisible="@{!data.showControls}"
+                    app:slideTop="@{data.showControls}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/close_button"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="@dimen/dimen_default"
+                    android:background="@{data.showControls || data.isLandscape ? @drawable/ic_close_white : @drawable/ic_close_black}"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -92,7 +108,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:itemCount="3"
-                    tools:layout_editor_absoluteY="496dp"
                     tools:listitem="@layout/player_product_item" />
 
                 <!--Product placeholder view (product collapse)-->

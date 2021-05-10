@@ -72,6 +72,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startWatchActivity(streamLink: String) {
-        startActivity(Intent(this, WatchActivity::class.java).putExtra(EXTRA_LINK, streamLink))
+        startActivity(Intent(this, PlayerActivity::class.java).putExtra(EXTRA_LINK, streamLink))
     }
 }

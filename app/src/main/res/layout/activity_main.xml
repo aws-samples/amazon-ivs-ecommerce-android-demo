@@ -4,14 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="false"
+    android:background="@color/white_color"
     tools:context=".activities.MainActivity">
-
-     <View
-        android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:background="@color/primary_grey_color"
-        android:elevation="3dp" />
 
     <LinearLayout
         android:id="@+id/main_toolbar"

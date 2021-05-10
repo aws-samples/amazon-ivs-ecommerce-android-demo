@@ -19,9 +19,9 @@ class Consumable<out T>(private val content: T) {
     val consumedValue get() = content
 }
 
+@Suppress("unused")
 class ConsumableLiveData<T> : MutableLiveData<Consumable<T>>() {
 
-    @Suppress("unused")
     val consumedValue get() = value?.consumedValue
 
     fun postConsumable(data: T) {

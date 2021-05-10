@@ -23,7 +23,7 @@
         </activity>
 
         <activity
-            android:name=".activities.WatchActivity"
+            android:name=".activities.PlayerActivity"
             android:screenOrientation="portrait" />
 
     </application>

@@ -29,6 +29,16 @@ object BindingAdapters {
         }
     }
 
+    @BindingAdapter("slideTop")
+    @JvmStatic
+    fun setSlideTop(view: View, value: Boolean) {
+        if (value) {
+            view.slideUpFadeIn(true)
+        } else {
+            view.slideDownFadeOut(true)
+        }
+    }
+
     @BindingAdapter("fadeAnimation")
     @JvmStatic
     fun setFadeAnimation(view: View, fadeOut: Boolean) {
