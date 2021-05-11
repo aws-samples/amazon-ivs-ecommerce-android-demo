@@ -51,7 +51,7 @@
                     android:contentDescription="@null"
                     android:scaleType="centerCrop"
                     app:imageResource="@{data.imageId}"
-                    tools:background="@color/colorGrey" />
+                    tools:background="@color/secondary_grey_color" />
 
             </androidx.cardview.widget.CardView>
         </FrameLayout>
@@ -60,6 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
+            android:visibility="@{first ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@+id/card_holder"
             app:layout_constraintEnd_toEndOf="@+id/card_holder"
             app:layout_constraintStart_toStartOf="@+id/card_holder"
@@ -75,7 +76,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:background="@color/colorBlack" />
+                tools:background="@color/black_color" />
 
             <TextView
                 android:id="@+id/live_status"
@@ -87,7 +88,7 @@
                 android:paddingStart="@dimen/dimen_default_small"
                 android:paddingEnd="@dimen/dimen_default_small"
                 android:text="@string/live_status_message"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/white_color"
                 android:textSize="@dimen/small_text_size"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView"
                 app:layout_constraintEnd_toEndOf="@+id/imageView"
