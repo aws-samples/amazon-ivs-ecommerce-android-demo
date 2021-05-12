@@ -16,11 +16,9 @@ import android.view.SurfaceView
 import android.view.View
 import android.view.WindowManager
 import androidx.annotation.WorkerThread
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.amazonaws.ivs.player.ecommerce.R
 import com.amazonaws.ivs.player.ecommerce.databinding.ActivityPlayerBinding
 import kotlinx.coroutines.delay
-import timber.log.Timber
 
 /**
  * Blurred background
@@ -128,29 +126,23 @@ fun View.animatePlaceholderHeight(collapse: Boolean) {
     animateHeight(collapse, normalHeight, expandedHeight)
 }
 
-fun SurfaceView.zoomToFit(windowManager: WindowManager, videoWidth: Int, videoHeight: Int) {
+/**
+ * Surface view width/height scaling
+ * @param windowManager window manager
+ * @param width video width
+ * @param height video height
+ */
+fun SurfaceView.setPortraitDimens(windowManager: WindowManager, width: Int, height: Int) {
     val point = Point()
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-        context.display?.getRealSize(point)
+    windowManager.defaultDisplay.getSize(point)
+    val aspectRatio = width.toFloat() / height.toFloat()
+    val portraitWidth = point.y * aspectRatio
+    if (portraitWidth >= point.x) {
+        layoutParams.width = portraitWidth.toInt()
+        layoutParams.height = point.y
     } else {
-        @Suppress("DEPRECATION")
-        windowManager.defaultDisplay.getSize(point)
-    }
-    val size = calculateSurfaceSize(point.x, point.y, videoWidth, videoHeight)
-    Timber.d("Calculated: ${size.first} ${size.second}")
-    layoutParams = ConstraintLayout.LayoutParams(size.first, size.second)
-}
-
-fun calculateSurfaceSize(surfaceWidth: Int, surfaceHeight: Int, videoWidth: Int, videoHeight: Int): Pair<Int, Int> {
-    val ratioHeight = videoHeight.toFloat() / videoWidth.toFloat()
-    val ratioWidth = videoWidth.toFloat() / videoHeight.toFloat()
-    val isPortrait = videoWidth < videoHeight
-    val calculatedHeight = if (isPortrait) (surfaceWidth / ratioWidth).toInt() else (surfaceWidth * ratioHeight).toInt()
-    val calculatedWidth = if (isPortrait) (surfaceHeight / ratioHeight).toInt() else (surfaceHeight * ratioWidth).toInt()
-    Timber.d("CALCULATED: ($surfaceWidth, $calculatedHeight) OR ($calculatedWidth, $surfaceHeight) FOR SURFACE: ($surfaceWidth, $surfaceHeight), VIDEO: ($videoWidth, $videoHeight)")
-    return if (calculatedWidth >= surfaceWidth) {
-        Pair(calculatedWidth, surfaceHeight)
-    } else {
-        Pair(surfaceWidth, calculatedHeight)
+        val portraitHeight = point.x / aspectRatio
+        layoutParams.width = point.x
+        layoutParams.height = portraitHeight.toInt()
     }
 }

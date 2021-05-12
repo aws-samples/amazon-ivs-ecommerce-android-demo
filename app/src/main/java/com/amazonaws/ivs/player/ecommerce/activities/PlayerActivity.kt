@@ -1,6 +1,5 @@
 package com.amazonaws.ivs.player.ecommerce.activities
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -85,7 +84,7 @@ class PlayerActivity : AppCompatActivity() {
             if (viewModel.isLandscape.value == true) {
                 ViewUtil.setLayoutParams(binding.surfaceView, it.first, it.second)
             } else {
-                binding.surfaceView.zoomToFit(windowManager, it.first, it.second)
+                binding.surfaceView.setPortraitDimens(windowManager, it.first, it.second)
             }
         })
 
@@ -116,11 +115,6 @@ class PlayerActivity : AppCompatActivity() {
 
         initUi()
         viewModel.playerStart(binding.surfaceView.holder.surface)
-    }
-
-    private fun updateSurfaceView() {
-        val playerParams = viewModel.playerParamsChanged.value
-        binding.surfaceView.zoomToFit(windowManager, playerParams!!.first, playerParams.second)
     }
 
     private fun initUi() {
@@ -165,11 +159,6 @@ class PlayerActivity : AppCompatActivity() {
     private fun startMainActivity() {
         finish()
         overridePendingTransition(R.anim.anim_default, R.anim.anim_slide_down)
-    }
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        updateSurfaceView()
     }
 
     override fun onBackPressed() {
