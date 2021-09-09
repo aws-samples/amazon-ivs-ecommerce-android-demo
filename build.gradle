@@ -1,20 +1,13 @@
 buildscript {
-    ext.kotlin_version = "1.5.30"
-    ext.lifecycle_version = "2.3.1"
-    ext.kotlinx_serialization_version = '1.2.0'
-    ext.glide_version = "4.12.0"
-    ext.coroutines_version = '1.4.1'
-    ext.room_version = '2.2.6'
-
     repositories {
         google()
         mavenCentral()
         
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
+        classpath 'com.android.tools.build:gradle:7.0.2'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.30'
+        classpath 'org.jetbrains.kotlin:kotlin-serialization:1.5.30'
     }
 }
 
