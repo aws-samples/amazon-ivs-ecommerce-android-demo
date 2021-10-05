@@ -1,11 +1,14 @@
 package com.amazonaws.ivs.player.ecommerce.common
 
 import android.graphics.Paint
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.amazonaws.ivs.player.ecommerce.BuildConfig
+import com.amazonaws.ivs.player.ecommerce.R
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
 object BindingAdapters {
 
@@ -19,51 +22,20 @@ object BindingAdapters {
         }
     }
 
-    @BindingAdapter("changeVisibility")
-    @JvmStatic
-    fun setChangeVisibility(view: View, fadeIn: Boolean) {
-        if (fadeIn) {
-            view.fadeIn()
-        } else {
-            view.fadeOut()
-        }
-    }
-
-    @BindingAdapter("slideTop")
-    @JvmStatic
-    fun setSlideTop(view: View, value: Boolean) {
-        if (value) {
-            view.slideUpFadeIn(true)
-        } else {
-            view.slideDownFadeOut(true)
-        }
-    }
-
-    @BindingAdapter("fadeAnimation")
-    @JvmStatic
-    fun setFadeAnimation(view: View, fadeOut: Boolean) {
-        if (fadeOut) {
-            view.visibility = View.VISIBLE
-            view.fadeOut()
-        } else {
-            view.visibility = View.INVISIBLE
-            view.fadeIn()
-        }
-    }
-
-    @BindingAdapter("changeHeight")
-    @JvmStatic
-    fun setViewHeight(view: View, value: Boolean) {
-        if (value) {
-            view.animatePlaceholderHeight(true)
-        } else {
-            view.animatePlaceholderHeight(false)
-        }
-    }
-
     @BindingAdapter("loadImage")
     @JvmStatic
-    fun setImage(view: ImageView, url: String) {
-        Glide.with(view.context).load(url).into(view)
+    fun loadImage(view: ImageView, url: String?) {
+        if (url == null) return
+        val radius = view.context.resources.getDimensionPixelSize(R.dimen.radius_normal)
+        Glide.with(view.context)
+            .load(BuildConfig.BASE_IMAGE_URL + url)
+            .transform(CenterCrop(), RoundedCorners(radius))
+            .into(view)
+    }
+
+    @BindingAdapter("loadLogo")
+    @JvmStatic
+    fun loadLogo(view: ImageView, url: String) {
+        Glide.with(view.context).load(url).circleCrop().into(view)
     }
 }

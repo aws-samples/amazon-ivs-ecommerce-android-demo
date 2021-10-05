@@ -1,20 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+    <string name="acme_co">ACME Co</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="all_products">All Products</string>
     <string name="app_name">eCommerce</string>
-
-    <string name="live_status_message">LIVE</string>
-    <string name="txt_learn_more">Learn More</string>
-    <string name="txt_buy_now">Buy Now</string>
-    <string name="main_learn_message">Learn before you buy</string>
-    <string name="main_tips_message">Get expert tips and recommendations live.</string>
-    <string name="main_offers_message">Limited daily offers</string>
-    <string name="search_hint">Search ACME</string>
-    <string name="txt_stream_title">ACME CO</string>
-    <string name="txt_stream_description">#GRWM Chatty Daily Makeup Routine</string>
-    <string name="txt_product_name">Product Name</string>
-    <string name="txt_product_details">Description of the product listed above. For example something like this: By combining potent natural ingredients, ancient rituals, and modern science, Fresh creates products that perform with experiences that transform.\nDiscovery drives innovation.</string>
-    <string name="txt_details_button">$99 ● Buy Now</string>
-    <string name="txt_purchased">purchased now</string>
-    <string name="error">Error</string>
-    <string name="error_dialog_message">We\'re sorry, but something went wrong. Please try again.</string>
-    <string name="close">Close</string>
+    <string name="buy_now">Buy Now</string>
+    <string name="deal_ends_in">Deal ends in</string>
+    <string name="logo_url">https://ecommerce.ivsdemos.com/images/profile.png</string>
+    <string name="product_icon_description">Product icon</string>
+    <string name="status_live">LIVE</string>
+    <string name="store_button_description">Store button</string>
 </resources>

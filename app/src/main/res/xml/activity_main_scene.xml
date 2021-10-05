@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        android:id="@+id/state_normal_to_tapped"
+        motion:constraintSetEnd="@+id/state_tapped"
+        motion:constraintSetStart="@id/state_normal"
+        motion:duration="@integer/transition_duration" />
+
+    <Transition
+        android:id="@+id/state_tapped_to_normal"
+        motion:constraintSetEnd="@+id/state_normal"
+        motion:constraintSetStart="@id/state_tapped"
+        motion:duration="@integer/transition_duration" />
+
+    <Transition
+        android:id="@+id/state_normal_to_streams_bottom_right"
+        motion:constraintSetEnd="@+id/state_streams_bottom_right"
+        motion:constraintSetStart="@id/state_normal"
+        motion:duration="@integer/transition_duration">
+        <KeyFrameSet>
+            <KeyAttribute
+                motion:framePosition="0"
+                motion:motionTarget="@id/bar_top">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="1" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="0"
+                motion:motionTarget="@id/bar_bottom">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="1" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="30"
+                motion:motionTarget="@id/bar_top">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="0" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="30"
+                motion:motionTarget="@id/bar_bottom">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="0" />
+            </KeyAttribute>
+        </KeyFrameSet>
+    </Transition>
+
+    <Transition
+        android:id="@+id/state_normal_to_streams_bottom_left"
+        motion:constraintSetEnd="@+id/state_streams_bottom_left"
+        motion:constraintSetStart="@id/state_normal"
+        motion:duration="@integer/transition_duration">
+        <KeyFrameSet>
+            <KeyAttribute
+                motion:framePosition="0"
+                motion:motionTarget="@id/bar_top">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="1" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="0"
+                motion:motionTarget="@id/bar_bottom">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="1" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="30"
+                motion:motionTarget="@id/bar_top">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="0" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="30"
+                motion:motionTarget="@id/bar_bottom">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="0" />
+            </KeyAttribute>
+        </KeyFrameSet>
+    </Transition>
+
+    <Transition
+        android:id="@+id/state_normal_to_streams_top_right"
+        motion:constraintSetEnd="@+id/state_streams_top_right"
+        motion:constraintSetStart="@id/state_normal"
+        motion:duration="@integer/transition_duration">
+        <KeyFrameSet>
+            <KeyAttribute
+                motion:framePosition="0"
+                motion:motionTarget="@id/bar_top">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="1" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="0"
+                motion:motionTarget="@id/bar_bottom">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="1" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="30"
+                motion:motionTarget="@id/bar_top">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="0" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="30"
+                motion:motionTarget="@id/bar_bottom">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="0" />
+            </KeyAttribute>
+        </KeyFrameSet>
+    </Transition>
+
+    <Transition
+        android:id="@+id/state_normal_to_streams_top_left"
+        motion:constraintSetEnd="@+id/state_streams_top_left"
+        motion:constraintSetStart="@id/state_normal"
+        motion:duration="@integer/transition_duration">
+        <KeyFrameSet>
+            <KeyAttribute
+                motion:framePosition="0"
+                motion:motionTarget="@id/bar_top">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="1" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="0"
+                motion:motionTarget="@id/bar_bottom">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="1" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="30"
+                motion:motionTarget="@id/bar_top">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="0" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="30"
+                motion:motionTarget="@id/bar_bottom">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="0" />
+            </KeyAttribute>
+        </KeyFrameSet>
+    </Transition>
+
+    <Transition
+        android:id="@+id/state_streams_to_normal_bottom_right"
+        motion:constraintSetEnd="@+id/state_normal"
+        motion:constraintSetStart="@id/state_streams_bottom_right"
+        motion:duration="@integer/transition_duration">
+        <KeyFrameSet>
+            <KeyAttribute
+                motion:framePosition="0"
+                motion:motionTarget="@id/bar_top">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="0" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="0"
+                motion:motionTarget="@id/bar_bottom">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="0" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="70"
+                motion:motionTarget="@id/bar_top">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="0" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="70"
+                motion:motionTarget="@id/bar_bottom">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="0" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="100"
+                motion:motionTarget="@id/bar_top">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="1" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="100"
+                motion:motionTarget="@id/bar_bottom">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="1" />
+            </KeyAttribute>
+        </KeyFrameSet>
+    </Transition>
+
+    <Transition
+        android:id="@+id/state_streams_to_normal_bottom_left"
+        motion:constraintSetEnd="@+id/state_normal"
+        motion:constraintSetStart="@id/state_streams_bottom_left"
+        motion:duration="@integer/transition_duration">
+        <KeyFrameSet>
+            <KeyAttribute
+                motion:framePosition="0"
+                motion:motionTarget="@id/bar_top">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="0" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="0"
+                motion:motionTarget="@id/bar_bottom">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="0" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="70"
+                motion:motionTarget="@id/bar_top">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="0" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="70"
+                motion:motionTarget="@id/bar_bottom">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="0" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="100"
+                motion:motionTarget="@id/bar_top">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="1" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="100"
+                motion:motionTarget="@id/bar_bottom">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="1" />
+            </KeyAttribute>
+        </KeyFrameSet>
+    </Transition>
+
+    <Transition
+        android:id="@+id/state_streams_to_normal_top_right"
+        motion:constraintSetEnd="@+id/state_normal"
+        motion:constraintSetStart="@id/state_streams_top_right"
+        motion:duration="@integer/transition_duration">
+        <KeyFrameSet>
+            <KeyAttribute
+                motion:framePosition="0"
+                motion:motionTarget="@id/bar_top">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="0" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="0"
+                motion:motionTarget="@id/bar_bottom">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="0" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="70"
+                motion:motionTarget="@id/bar_top">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="0" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="70"
+                motion:motionTarget="@id/bar_bottom">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="0" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="100"
+                motion:motionTarget="@id/bar_top">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="1" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="100"
+                motion:motionTarget="@id/bar_bottom">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="1" />
+            </KeyAttribute>
+        </KeyFrameSet>
+    </Transition>
+
+    <Transition
+        android:id="@+id/state_streams_to_normal_top_left"
+        motion:constraintSetEnd="@+id/state_normal"
+        motion:constraintSetStart="@id/state_streams_top_left"
+        motion:duration="@integer/transition_duration">
+        <KeyFrameSet>
+            <KeyAttribute
+                motion:framePosition="0"
+                motion:motionTarget="@id/bar_top">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="0" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="0"
+                motion:motionTarget="@id/bar_bottom">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="0" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="70"
+                motion:motionTarget="@id/bar_top">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="0" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="70"
+                motion:motionTarget="@id/bar_bottom">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="0" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="100"
+                motion:motionTarget="@id/bar_top">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="1" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="100"
+                motion:motionTarget="@id/bar_bottom">
+                <CustomAttribute
+                    motion:attributeName="alpha"
+                    motion:customFloatValue="1" />
+            </KeyAttribute>
+        </KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/state_normal">
+        <Constraint
+            android:id="@+id/stream_list_holder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible" />
+        <Constraint
+            android:id="@+id/player_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <Constraint
+            android:id="@+id/bar_top"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/timer_bubble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_normal"
+            motion:layout_constraintBottom_toTopOf="@id/bar_bottom"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/bar_bottom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_normal"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/overlay"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:visibility="invisible"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet
+        android:id="@+id/state_tapped"
+        motion:deriveConstraintsFrom="@id/state_normal">
+        <Constraint
+            android:id="@+id/bar_top"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-56dp"
+            android:visibility="invisible"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/timer_bubble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_normal"
+            motion:layout_constraintBottom_toTopOf="@id/bar_bottom"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/bar_bottom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="-64dp"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_normal"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/overlay"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:visibility="visible"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet
+        android:id="@+id/state_streams_bottom_right"
+        motion:deriveConstraintsFrom="@id/state_normal">
+        <Constraint
+            android:id="@+id/stream_list_holder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible" />
+        <Constraint
+            android:id="@+id/player_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/margin_normal"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintDimensionRatio="9:16"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintWidth_percent="0.4" />
+        <Constraint
+            android:id="@+id/bar_top"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/timer_bubble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_marginBottom="@dimen/margin_normal"
+            motion:layout_constraintBottom_toTopOf="@id/bar_bottom"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/bar_bottom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_normal"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet
+        android:id="@+id/state_streams_bottom_left"
+        motion:deriveConstraintsFrom="@id/state_normal">
+        <Constraint
+            android:id="@+id/stream_list_holder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible" />
+        <Constraint
+            android:id="@+id/player_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/margin_normal"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintDimensionRatio="9:16"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintWidth_percent="0.4" />
+        <Constraint
+            android:id="@+id/bar_top"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/timer_bubble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_marginBottom="@dimen/margin_normal"
+            motion:layout_constraintBottom_toTopOf="@id/bar_bottom"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/bar_bottom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_normal"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet
+        android:id="@+id/state_streams_top_right"
+        motion:deriveConstraintsFrom="@id/state_normal">
+        <Constraint
+            android:id="@+id/stream_list_holder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible" />
+        <Constraint
+            android:id="@+id/player_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_normal"
+            motion:layout_constraintDimensionRatio="9:16"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintWidth_percent="0.4" />
+        <Constraint
+            android:id="@+id/bar_top"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/timer_bubble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_marginBottom="@dimen/margin_normal"
+            motion:layout_constraintBottom_toTopOf="@id/bar_bottom"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/bar_bottom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_normal"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet
+        android:id="@+id/state_streams_top_left"
+        motion:deriveConstraintsFrom="@id/state_normal">
+        <Constraint
+            android:id="@+id/stream_list_holder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible" />
+        <Constraint
+            android:id="@+id/player_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_normal"
+            motion:layout_constraintDimensionRatio="9:16"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintWidth_percent="0.4" />
+        <Constraint
+            android:id="@+id/bar_top"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/timer_bubble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_marginBottom="@dimen/margin_normal"
+            motion:layout_constraintBottom_toTopOf="@id/bar_bottom"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/bar_bottom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_normal"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+</MotionScene>

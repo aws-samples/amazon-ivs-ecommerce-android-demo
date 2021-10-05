@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="dimen_default_small">4dp</dimen>
-    <dimen name="dimen_default_medium">10dp</dimen>
-    <dimen name="dimen_default">20dp</dimen>
-    <dimen name="dimen_default_big">30dp</dimen>
-    <dimen name="small_text_size">12sp</dimen>
-    <dimen name="medium_text_size">16sp</dimen>
-    <dimen name="big_text_size">18sp</dimen>
-    <dimen name="button_height">40dp</dimen>
-    <dimen name="toolbar_button_dimen">25dp</dimen>
-    <dimen name="product_view_width">310dp</dimen>
-    <dimen name="placeholder_normal_height">1dp</dimen>
-    <dimen name="placeholder_expanded_height">135dp</dimen>
-    <dimen name="spannable_radius">2dp</dimen>
-    <dimen name="spannable_padding">3dp</dimen>
-    <dimen name="spannable_width">24dp</dimen>
+    <dimen name="margin_huge">48dp</dimen>
+    <dimen name="margin_large">24dp</dimen>
+    <dimen name="margin_normal">16dp</dimen>
+    <dimen name="margin_medium">8dp</dimen>
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="padding_large">24dp</dimen>
+    <dimen name="padding_normal">16dp</dimen>
+    <dimen name="padding_medium">8dp</dimen>
+    <dimen name="padding_small">4dp</dimen>
+    <dimen name="padding_image_normal">10dp</dimen>
+    <dimen name="elevation_normal">8dp</dimen>
+    <dimen name="radius_normal">8dp</dimen>
+    <dimen name="divider_normal">1.5dp</dimen>
+    <integer name="transition_duration">250</integer>
 </resources>
