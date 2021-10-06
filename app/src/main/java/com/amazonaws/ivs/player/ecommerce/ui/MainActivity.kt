@@ -16,6 +16,7 @@ import com.amazonaws.ivs.player.ecommerce.ui.adapters.ProductsAdapter
 import com.amazonaws.ivs.player.ecommerce.ui.viewmodels.MainViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
+import timber.log.Timber
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -36,6 +37,18 @@ class MainActivity : AppCompatActivity() {
         R.id.state_streams_top_left -> true
         else -> false
     }
+    private val isNormalOrMetadataState get() = when (binding.motionLayout.currentState) {
+        R.id.state_normal,
+        R.id.state_metadata -> true
+        else -> false
+    }
+    private val isTappedState get() = when (binding.motionLayout.currentState) {
+        R.id.state_tapped_normal,
+        R.id.state_tapped_metadata -> true
+        else -> false
+    }
+    private val isNormalState get() = binding.motionLayout.currentState == R.id.state_normal
+    private val isTransitioning get() = binding.motionLayout.progress > 0 && binding.motionLayout.progress < 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,27 +56,42 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.storeButton.setOnClickListener {
-            when (binding.motionLayout.currentState) {
-                R.id.state_normal -> {
-                    when (anchorType) {
-                        AnchorType.TOP_LEFT -> binding.motionLayout.setTransition(R.id.state_normal_to_streams_top_left)
-                        AnchorType.TOP_RIGHT -> binding.motionLayout.setTransition(R.id.state_normal_to_streams_top_right)
-                        AnchorType.BOTTOM_LEFT -> binding.motionLayout.setTransition(R.id.state_normal_to_streams_bottom_left)
-                        AnchorType.BOTTOM_RIGHT -> binding.motionLayout.setTransition(R.id.state_normal_to_streams_bottom_right)
-                    }
-                    binding.motionLayout.transitionToEnd()
+            if (isNormalOrMetadataState) {
+                val endState = when (anchorType) {
+                    AnchorType.TOP_LEFT -> if (isNormalState) R.id.state_normal_to_streams_top_left else
+                        R.id.state_metadata_to_streams_top_left
+                    AnchorType.TOP_RIGHT -> if (isNormalState) R.id.state_normal_to_streams_top_right else
+                        R.id.state_metadata_to_streams_top_right
+                    AnchorType.BOTTOM_LEFT -> if (isNormalState) R.id.state_normal_to_streams_bottom_left else
+                        R.id.state_metadata_to_streams_bottom_left
+                    AnchorType.BOTTOM_RIGHT -> if (isNormalState) R.id.state_normal_to_streams_bottom_right else
+                        R.id.state_metadata_to_streams_bottom_right
                 }
+                binding.motionLayout.setTransition(endState)
+                binding.motionLayout.transitionToEnd()
             }
         }
         binding.playerView.setOnClickListener {
             if (touchOffset != null) return@setOnClickListener
             when (binding.motionLayout.currentState) {
                 R.id.state_normal -> {
+                    Timber.d("Transition to normal tapped")
                     binding.motionLayout.setTransition(R.id.state_normal_to_tapped)
                     binding.motionLayout.transitionToEnd()
                 }
-                R.id.state_tapped -> {
+                R.id.state_metadata -> {
+                    Timber.d("Transition to metadata tapped")
+                    binding.motionLayout.setTransition(R.id.state_metadata_to_tapped)
+                    binding.motionLayout.transitionToEnd()
+                }
+                R.id.state_tapped_normal -> {
+                    Timber.d("Transition to normal")
                     binding.motionLayout.setTransition(R.id.state_tapped_to_normal)
+                    binding.motionLayout.transitionToEnd()
+                }
+                R.id.state_tapped_metadata -> {
+                    Timber.d("Transition to metadata")
+                    binding.motionLayout.setTransition(R.id.state_tapped_to_metadata)
                     binding.motionLayout.transitionToEnd()
                 }
                 R.id.state_streams_bottom_right,
@@ -80,7 +108,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onTransitionChange(motionLayout: MotionLayout?, startId: Int, endId: Int, progress: Float) {
                 super.onTransitionChange(motionLayout, startId, endId, progress)
-                if (endId == R.id.state_normal) resizePlayer()
+                if (endId == R.id.state_normal || endId == R.id.state_metadata) resizePlayer()
             }
         })
 
@@ -90,22 +118,21 @@ class MainActivity : AppCompatActivity() {
         binding.player.onReady {
             viewModel.initPlayer(binding.player)
         }
-        binding.motionLayout.getConstraintSet(binding.motionLayout.currentState).run {
-            getConstraint(R.id.bar_bottom).propertySet.alpha = 0f
-            getConstraint(R.id.timer_bubble).propertySet.alpha = 0f
-        }
 
         launchMain {
             viewModel.products.collect { products ->
                 adapter.products = products
+                var endId = if (isTappedState) R.id.state_tapped_normal else R.id.state_normal
+                var transitionId = if (isTappedState) R.id.state_tapped_metadata_to_normal else R.id.state_metadata_to_normal
                 products.firstOrNull { it.isSelected }?.let { product ->
                     binding.product = product
-                    binding.motionLayout.getConstraintSet(binding.motionLayout.currentState).run {
-                        getConstraint(R.id.bar_bottom).propertySet.alpha = 1f
-                        getConstraint(R.id.timer_bubble).propertySet.alpha = 1f
-                    }
-                    binding.barBottom.animateAlpha(1f)
-                    binding.timerBubble.animateAlpha(1f)
+                    endId = if (isTappedState) R.id.state_tapped_metadata else R.id.state_metadata
+                    transitionId = if (isTappedState) R.id.state_tapped_normal_to_metadata else R.id.state_normal_to_metadata
+                }
+                if (binding.motionLayout.currentState != endId && !isTransitioning && (isNormalOrMetadataState || isTappedState)) {
+                    Timber.d("Transitioning to metadata: ${endId == R.id.state_metadata || endId == R.id.state_tapped_metadata}")
+                    binding.motionLayout.setTransition(transitionId)
+                    binding.motionLayout.transitionToEnd()
                 }
             }
         }
@@ -218,12 +245,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun restorePlayerView() {
-        when (anchorType) {
-            AnchorType.TOP_LEFT -> binding.motionLayout.setTransition(R.id.state_streams_to_normal_top_left)
-            AnchorType.TOP_RIGHT -> binding.motionLayout.setTransition(R.id.state_streams_to_normal_top_right)
-            AnchorType.BOTTOM_LEFT -> binding.motionLayout.setTransition(R.id.state_streams_to_normal_bottom_left)
-            AnchorType.BOTTOM_RIGHT -> binding.motionLayout.setTransition(R.id.state_streams_to_normal_bottom_right)
+        val endState = when (anchorType) {
+            AnchorType.TOP_LEFT -> if (viewModel.isShowingProduct) R.id.state_streams_to_metadata_top_left else
+                R.id.state_streams_to_normal_top_left
+            AnchorType.TOP_RIGHT -> if (viewModel.isShowingProduct) R.id.state_streams_to_metadata_top_right else
+                R.id.state_streams_to_normal_top_right
+            AnchorType.BOTTOM_LEFT -> if (viewModel.isShowingProduct) R.id.state_streams_to_metadata_bottom_left else
+                R.id.state_streams_to_normal_bottom_left
+            AnchorType.BOTTOM_RIGHT -> if (viewModel.isShowingProduct) R.id.state_streams_to_metadata_bottom_right else
+                R.id.state_streams_to_normal_bottom_right
         }
+        binding.motionLayout.setTransition(endState)
         binding.motionLayout.transitionToEnd()
         resizePlayer()
     }

@@ -32,6 +32,7 @@ class MainViewModel(products: ProductsModel) : ViewModel() {
     val products: SharedFlow<List<ProductModel>> = _products
 
     val playerSize get() = _onSizeChanged.replayCache.lastOrNull()
+    val isShowingProduct get() = _products.replayCache.lastOrNull()?.any { it.isSelected } ?: false
 
     init {
         rawProducts.addAll(products.products)

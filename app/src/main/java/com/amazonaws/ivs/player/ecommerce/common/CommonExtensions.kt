@@ -7,7 +7,7 @@ import timber.log.Timber
 private val mainScope = CoroutineScope(Dispatchers.Main + SupervisorJob())
 
 fun launchMain(block: suspend CoroutineScope.() -> Unit) = mainScope.launch(
-    context = CoroutineExceptionHandler { _, e -> Timber.d("Coroutine failed ${e.localizedMessage}") },
+    context = CoroutineExceptionHandler { _, e -> Timber.d(e, "Coroutine failed ${e.localizedMessage}") },
     block = block
 )
 

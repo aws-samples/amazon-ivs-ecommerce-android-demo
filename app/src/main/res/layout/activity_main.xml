@@ -173,6 +173,7 @@
                 android:paddingTop="@dimen/padding_medium"
                 android:paddingEnd="@dimen/padding_normal"
                 android:paddingBottom="@dimen/padding_medium"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toTopOf="@id/bar_bottom"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
@@ -207,6 +208,7 @@
                 android:background="@drawable/bg_rounded_gray"
                 android:padding="@dimen/padding_normal"
                 android:elevation="@dimen/elevation_normal"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
