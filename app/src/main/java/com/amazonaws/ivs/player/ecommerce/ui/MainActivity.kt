@@ -124,8 +124,12 @@ class MainActivity : AppCompatActivity() {
                 adapter.products = products
                 var endId = if (isTappedState) R.id.state_tapped_normal else R.id.state_normal
                 var transitionId = if (isTappedState) R.id.state_tapped_metadata_to_normal else R.id.state_metadata_to_normal
+                var selectedProduct = viewModel.hasProductToSelect
                 products.firstOrNull { it.isSelected }?.let { product ->
                     binding.product = product
+                    selectedProduct = true
+                }
+                if (selectedProduct) {
                     endId = if (isTappedState) R.id.state_tapped_metadata else R.id.state_metadata
                     transitionId = if (isTappedState) R.id.state_tapped_normal_to_metadata else R.id.state_normal_to_metadata
                 }

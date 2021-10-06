@@ -33,6 +33,7 @@ class MainViewModel(products: ProductsModel) : ViewModel() {
 
     val playerSize get() = _onSizeChanged.replayCache.lastOrNull()
     val isShowingProduct get() = _products.replayCache.lastOrNull()?.any { it.isSelected } ?: false
+    val hasProductToSelect get() = metadata.isNotEmpty()
 
     init {
         rawProducts.addAll(products.products)
