@@ -20,8 +20,7 @@
             android:id="@+id/motion_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutDescription="@xml/activity_main_scene"
-            tools:background="@color/gray_light">
+            app:layoutDescription="@xml/activity_main_scene">
 
             <LinearLayout
                 android:id="@+id/stream_list_holder"
@@ -37,6 +36,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_huge"
+                    android:fontFamily="@font/amazon_ember"
+                    android:textStyle="bold"
                     android:text="@string/all_products"
                     android:textColor="@color/white"
                     android:textSize="24sp" />
@@ -51,27 +52,34 @@
 
             </LinearLayout>
 
-            <FrameLayout
+            <androidx.cardview.widget.CardView
                 android:id="@+id/player_view"
-                android:layout_margin="0dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:foreground="@drawable/bg_player">
+                app:cardElevation="0dp"
+                app:cardCornerRadius="30dp"
+                app:cardBackgroundColor="@color/black">
 
-                <TextureView
-                    android:id="@+id/player"
-                    android:alpha="0"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent">
 
-                <ProgressBar
-                    android:id="@+id/player_loading"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:indeterminateDrawable="@drawable/bg_progress_bar"
-                    android:layout_gravity="center" />
+                    <TextureView
+                        android:id="@+id/player"
+                        android:alpha="0"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
 
-            </FrameLayout>
+                    <ProgressBar
+                        android:id="@+id/player_loading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:indeterminateDrawable="@drawable/bg_progress_bar"
+                        android:layout_gravity="center" />
+
+                </FrameLayout>
+
+            </androidx.cardview.widget.CardView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/bar_top"
@@ -221,11 +229,10 @@
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:text="@{product.name}"
-                    app:layout_constraintBottom_toTopOf="@id/product_old_price"
+                    app:layout_constraintBottom_toTopOf="@id/product_new_price"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/product_icon"
                     app:layout_constraintTop_toTopOf="@id/product_icon"
-                    app:layout_constraintVertical_chainStyle="packed"
                     tools:text="Eyeshadow Palette - Set of 3 Palettes" />
 
                 <TextView
@@ -246,7 +253,7 @@
 
                 <TextView
                     android:id="@+id/product_new_price"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:textSize="15sp"
@@ -257,13 +264,12 @@
                     android:layout_marginStart="@dimen/margin_small"
                     app:layout_constraintStart_toEndOf="@id/product_old_price"
                     app:layout_constraintTop_toBottomOf="@id/product_name"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="@id/product_icon" />
 
                 <TextView
                     android:id="@+id/product_add"
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
+                    android:layout_height="42dp"
                     android:layout_marginTop="@dimen/margin_normal"
                     android:layout_marginEnd="@dimen/margin_medium"
                     android:background="@drawable/bg_button_gray"
@@ -279,7 +285,7 @@
                 <TextView
                     android:id="@+id/product_buy"
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
+                    android:layout_height="42dp"
                     android:background="@drawable/bg_button_gray"
                     android:fontFamily="@font/amazon_ember"
                     android:gravity="center"

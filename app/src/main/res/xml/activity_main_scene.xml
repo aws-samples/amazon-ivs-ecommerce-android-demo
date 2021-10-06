@@ -375,7 +375,11 @@
         <Constraint
             android:id="@+id/player_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+            <CustomAttribute
+                motion:attributeName="radius"
+                motion:customDimension="30dp" />
+        </Constraint>
         <Constraint
             android:id="@+id/bar_top"
             android:layout_width="0dp"
@@ -468,7 +472,11 @@
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintDimensionRatio="9:16"
             motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintWidth_percent="0.4" />
+            motion:layout_constraintWidth="100dp">
+            <CustomAttribute
+                motion:attributeName="radius"
+                motion:customDimension="8dp" />
+        </Constraint>
         <Constraint
             android:id="@+id/bar_top"
             android:layout_width="0dp"
@@ -516,7 +524,11 @@
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintDimensionRatio="9:16"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintWidth_percent="0.4" />
+            motion:layout_constraintWidth="100dp">
+            <CustomAttribute
+                motion:attributeName="radius"
+                motion:customDimension="8dp" />
+        </Constraint>
         <Constraint
             android:id="@+id/bar_top"
             android:layout_width="0dp"
@@ -564,7 +576,11 @@
             motion:layout_constraintDimensionRatio="9:16"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintWidth_percent="0.4" />
+            motion:layout_constraintWidth="100dp">
+            <CustomAttribute
+                motion:attributeName="radius"
+                motion:customDimension="8dp" />
+        </Constraint>
         <Constraint
             android:id="@+id/bar_top"
             android:layout_width="0dp"
@@ -612,7 +628,11 @@
             motion:layout_constraintDimensionRatio="9:16"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintWidth_percent="0.4" />
+            motion:layout_constraintWidth="100dp">
+            <CustomAttribute
+                motion:attributeName="radius"
+                motion:customDimension="8dp" />
+        </Constraint>
         <Constraint
             android:id="@+id/bar_top"
             android:layout_width="0dp"

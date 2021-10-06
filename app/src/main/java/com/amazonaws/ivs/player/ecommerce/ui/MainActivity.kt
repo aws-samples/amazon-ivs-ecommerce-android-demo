@@ -75,9 +75,12 @@ class MainActivity : AppCompatActivity() {
         binding.motionLayout.setTransitionListener(object : TransitionAdapter() {
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
                 super.onTransitionCompleted(motionLayout, currentId)
-                viewModel.playerSize?.let { size ->
-                    binding.player.zoomToFit(size)
-                }
+                resizePlayer()
+            }
+
+            override fun onTransitionChange(motionLayout: MotionLayout?, startId: Int, endId: Int, progress: Float) {
+                super.onTransitionChange(motionLayout, startId, endId, progress)
+                if (endId == R.id.state_normal) resizePlayer()
             }
         })
 
@@ -190,6 +193,12 @@ class MainActivity : AppCompatActivity() {
         return super.dispatchTouchEvent(event)
     }
 
+    private fun resizePlayer() {
+        viewModel.playerSize?.let { size ->
+            binding.player.zoomToFit(size)
+        }
+    }
+
     private fun updatePlayerState() = launchMain {
         delay(ANIMATION_DURATION)
         val x = binding.playerView.x
@@ -204,9 +213,7 @@ class MainActivity : AppCompatActivity() {
         binding.playerView.doOnNextLayout { view ->
             view.x = x
             view.y = y
-            viewModel.playerSize?.let { size ->
-                binding.player.zoomToFit(size)
-            }
+            resizePlayer()
         }
     }
 
@@ -218,8 +225,6 @@ class MainActivity : AppCompatActivity() {
             AnchorType.BOTTOM_RIGHT -> binding.motionLayout.setTransition(R.id.state_streams_to_normal_bottom_right)
         }
         binding.motionLayout.transitionToEnd()
-        viewModel.playerSize?.let { size ->
-            binding.player.zoomToFit(size)
-        }
+        resizePlayer()
     }
 }

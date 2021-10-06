@@ -36,11 +36,10 @@
             android:layout_marginStart="@dimen/margin_medium"
             android:text="@{product.name}"
             tools:text="Eyeshadow Palette - Set of 3 Palettes"
-            app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintStart_toEndOf="@id/product_icon"
             app:layout_constraintTop_toTopOf="@id/product_icon"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/product_old_price"/>
+            app:layout_constraintBottom_toTopOf="@id/product_new_price"/>
 
         <TextView
             android:id="@+id/product_old_price"
@@ -60,7 +59,7 @@
 
         <TextView
             android:id="@+id/product_new_price"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:textSize="15sp"
@@ -71,13 +70,13 @@
             android:layout_marginStart="@dimen/margin_small"
             app:layout_constraintStart_toEndOf="@id/product_old_price"
             app:layout_constraintTop_toBottomOf="@id/product_name"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/product_icon" />
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/divider_normal"
             android:background="@color/gray_darker"
+            android:layout_marginTop="@dimen/margin_normal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/product_icon"
             app:layout_constraintEnd_toEndOf="parent" />
