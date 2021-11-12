@@ -16,25 +16,6 @@ app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png
 app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png
 app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
 
-**The following images are used, or derivatives of images used, under the Pexels License (available at https://www.pexels.com/terms-of-service/):
-
-app/src/main/res/drawable/avatar_1.png
-app/src/main/res/drawable/avatar_2.png
-app/src/main/res/drawable/avatar_3.png
-app/src/main/res/drawable/avatar_4.png
-app/src/main/res/drawable/product_main_0.png
-app/src/main/res/drawable/product_main_1.png
-app/src/main/res/drawable/product_main_2.png
-
-**The following fonts are used and licensed under the SIL Open Font License, Version 1.1.
-This license is copied below, and is also available with a FAQ at:
-http://scripts.sil.org/OFL
-
-app/src/main/res/font/dm_sans_bold.ttf
-app/src/main/res/font/dm_sans_medium.ttf
-app/src/main/res/font/dm_sans_regular.ttf
-app/src/main/res/font/dm_serif_display_regular.ttf
-
 -----------------------------------------------------------
 SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
 -----------------------------------------------------------

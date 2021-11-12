@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelStoreOwner
 import com.amazonaws.ivs.player.ecommerce.common.LineNumberDebugTree
 import timber.log.Timber
 
-open class App : Application(), ViewModelStoreOwner {
+class App : Application(), ViewModelStoreOwner {
 
     override fun getViewModelStore() = appViewModelStore
 
@@ -14,7 +14,7 @@ open class App : Application(), ViewModelStoreOwner {
         super.onCreate()
 
         if (BuildConfig.DEBUG) {
-            Timber.plant(LineNumberDebugTree("Ecommerce"))
+            Timber.plant(LineNumberDebugTree())
         }
     }
 

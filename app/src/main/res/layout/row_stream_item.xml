@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="product"
+            type="com.amazonaws.ivs.player.ecommerce.models.ProductModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/stream_item"
+        android:background="@drawable/bg_button_black"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/product_icon"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:contentDescription="@string/product_icon_description"
+            app:loadImage="@{product.imageLargeUrl}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:fontFamily="@font/amazon_ember"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:text="@{product.name}"
+            tools:text="Eyeshadow Palette - Set of 3 Palettes"
+            app:layout_constraintStart_toEndOf="@id/product_icon"
+            app:layout_constraintTop_toTopOf="@id/product_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/product_new_price"/>
+
+        <TextView
+            android:id="@+id/product_old_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray"
+            android:textSize="15sp"
+            android:fontFamily="@font/amazon_ember"
+            android:text="@{product.oldPrice}"
+            app:strikeThrough="@{true}"
+            tools:text="$99"
+            android:textStyle="bold"
+            android:visibility="@{product.discounted ? View.VISIBLE : View.GONE}"
+            app:layout_constraintStart_toStartOf="@id/product_name"
+            app:layout_constraintTop_toTopOf="@id/product_new_price"
+            app:layout_constraintBottom_toBottomOf="@id/product_new_price" />
+
+        <TextView
+            android:id="@+id/product_new_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:fontFamily="@font/amazon_ember"
+            android:text="@{product.newPrice}"
+            tools:text="$99"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/margin_small"
+            app:layout_constraintStart_toEndOf="@id/product_old_price"
+            app:layout_constraintTop_toBottomOf="@id/product_name"
+            app:layout_constraintBottom_toBottomOf="@id/product_icon" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_normal"
+            android:background="@color/gray_darker"
+            android:layout_marginTop="@dimen/margin_normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_icon"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

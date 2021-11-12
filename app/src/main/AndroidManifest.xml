@@ -13,9 +13,8 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".ui.MainActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
             android:exported="true"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
@@ -23,12 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".activities.PlayerActivity"
-            android:screenOrientation="portrait"
-            android:exported="true"
-            tools:ignore="LockedOrientationActivity" />
 
     </application>
 

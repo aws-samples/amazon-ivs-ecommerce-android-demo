@@ -2,9 +2,9 @@ package com.amazonaws.ivs.player.ecommerce.common
 
 import timber.log.Timber
 
+private const val TIMBER_TAG = "eCommerce"
 
-class LineNumberDebugTree(private val tag: String) : Timber.DebugTree() {
-
+class LineNumberDebugTree : Timber.DebugTree() {
     override fun createStackElementTag(element: StackTraceElement) =
-        "$tag: (${element.fileName}:${element.lineNumber}) #${element.methodName} "
+        "$TIMBER_TAG: (${element.fileName}:${element.lineNumber}) #${element.methodName} "
 }

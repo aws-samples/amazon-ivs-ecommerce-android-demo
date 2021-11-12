@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_primary">#FFFFFF</color>
-    <color name="color_primary_dark">#1B1B1B</color>
-    <color name="primary_orange_color">#F8991D</color>
-    <color name="secondary_orange_color">#FF7676</color>
-    <color name="color_background">#16181D</color>
-    <color name="white_color">#FFFFFF</color>
-    <color name="black_color">#000000</color>
-    <color name="primary_grey_color">#ECEBEB</color>
-    <color name="secondary_grey_color">#B6B6B6</color>
-    <color name="red_accent_color">#FF0000</color>
-    <color name="transparent_color">#00000000</color>
-    <color name="overlay_color">#80000000</color>
-    <color name="gradient_color">#66000000</color>
-    <color name="gradient_overlay_color">#CC000000</color>
-    <color name="alert_dialog_background">#4C4E53</color>
-    <color name="primary_text_color">#FFFFFF</color>
-    <color name="secondary_text_color">#D7D7D7</color>
+    <color name="black">#111111</color>
+    <color name="black_light">#1F1F1F</color>
+    <color name="black_translucent">#CC111111</color>
+    <color name="black_dark">#000000</color>
+    <color name="gray_light">#EEEEEE</color>
+    <color name="gray">#999999</color>
+    <color name="gray_dark">#555555</color>
+    <color name="gray_darker">#333333</color>
+    <color name="white">#FFFFFF</color>
+    <color name="red">#FC0000</color>
+    <color name="yellow">#FFE249</color>
+    <color name="transparent">#00000000</color>
+    <color name="translucent">#99000000</color>
+    <color name="ic_launcher_background">#FFFFFF</color>
 </resources>
