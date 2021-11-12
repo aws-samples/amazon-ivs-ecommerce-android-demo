@@ -14,7 +14,7 @@ android {
         targetSdkVersion 31
         versionCode 1
         versionName '1.0'
-        buildConfigField "String", "BASE_STREAM_URL", "\"https://4da4a22026d3.us-west-2.playback.live-video.net/api/video/v1/us-west-2.298083573632.channel.hdviye1zVPxT.m3u8\""
+        buildConfigField "String", "BASE_STREAM_URL", "\"https://4c62a87c1810.us-west-2.playback.live-video.net/api/video/v1/us-west-2.049054135175.channel.onToXRHIurEP.m3u8\""
         buildConfigField "String", "BASE_IMAGE_URL", "\"https://ecommerce.ivsdemos.com/\""
     }
 

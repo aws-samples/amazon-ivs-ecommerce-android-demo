@@ -8,7 +8,7 @@ A demo mobile application intended as an educational tool for demonstrating how 
 
 This is a server-less Android application that uses only TimedMetadata to show products. The demo is written in [Kotlin](https://developer.android.com/kotlin) and showcases how customers can load and play an Amazon IVS stream and display browsable product information using TimedMetadata.
 
-This demo uses a 24/7 [looping stream](https://0e65d5729bda.us-west-2.playback.live-video.net/api/video/v1/us-west-2.484704431806.channel.qeejlweDQUeV.m3u8) which emits a TimedMetadata event every few seconds. These TimedMetadata events describe product information in json format, which is used by the app to show a carousel of products, and to highlight the product being shown on stream.
+This demo uses a 24/7 looping stream which emits a TimedMetadata event every few seconds. These TimedMetadata events describe product information in json format, which is used by the app to show a carousel of products, and to highlight the product being shown on stream.
 
 ## Getting Started
 
@@ -42,40 +42,20 @@ You should see the Android emulator boot up and launch the demo app. This may ta
 
 1. Open the [Amazon IVS Console](https://console.aws.amazon.com/ivs) and navigate to the channel you would like to use.
 2. Copy the _Playback URL_ for the channel. The URL should end in `.m3u8`. (For example: `https://4da4a22026d3.us-west-2.playback.live-video.net/api/video/v1/us-west-2.298083573632.channel.WbhDQYgfYHoT.m3u8`).
-3. In Android Studio, open `src/main/java/com/amazonaws/ivs/player/ecommerce/common/Configuration.kt`.
-4. If you are streaming portrait video, replace the string on line `8` with the _Playback URL_ from step 2\. For landscape video, replace the string on line `9`.
-5. Save and build the application. Navigate to the leftmost image in the `LIVE` carousel to view landscape video, or the second-to-leftmost image to view portrait video.
+3. In Android Studio, open the **app** `build.grade` (NOT the project build.gradle) file.
+4. Replace the string between the escaped quotes on line `17` with the _Playback URL_ from step 2.
+5. Save the file and Android Studio should show a banner that prompts you to sync the project. Click "Sync Now" to sync.
+6. Save and build the application.
 
 ### Using your own TimedMetadata events
 
 Amazon IVS TimedMetadata provides a way to embed metadata in an Amazon IVS stream. It ensures that your users receive the metadata at the same time as the video stream, regardless of stream latency or geographic location. Learn how to embed TimedMetadata in stream: [Embedding Metadata within a Video Stream](https://docs.aws.amazon.com/ivs/latest/userguide/SEM.html).
 
-This example expects an array of json that represents each product in the carousel. This approach is not recommended for production applications, given that it requires all product information to be contained in the stream's TimedMetadata. A more scalable approach using product indexes in TimedMetadata and [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) is documented in the [Amazon IVS eCommerce Web Demo](https://github.com/aws-samples/amazon-ivs-ecommerce-web-demo).
+This example expects a `productId` that represents the unique identifier for a project in the `streams.json` file. A more scalable solution would be to store product information in [Amazon DynamoDB](https://aws.amazon.com/dynamodb/). This approach is documented in the [Amazon IVS eCommerce Web Demo](https://github.com/aws-samples/amazon-ivs-ecommerce-web-demo).
 
 ```
 "metadata" : {
-  "products": [
-    {
-      "id": 0,
-      "priceDiscount": "$<product-discount-price>",
-      "priceOriginal": "$<product-original-price>",
-      "imageUrl": "<product-image-url>",
-      "name": "<product-name>",
-      "webLink": "<product-details-url>",
-      "isFeatured": <BOOL | true if currently on stream, false if not>,
-      "lastPurchaser": {
-        "username": "<purchaser-name>",
-        "userprofile": "<purchaser-image-url>"
-      }
-    },
-    {
-      "id": 1,
-      "priceDiscount": "$<product-discount-price>",
-      "priceOriginal": "$<product-original-price>",
-      ...
-    },
-    ...
-  ]
+  "productId": "1000567892"
 }
 ```
 
