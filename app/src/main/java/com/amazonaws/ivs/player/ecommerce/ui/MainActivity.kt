@@ -119,7 +119,7 @@ class MainActivity : AppCompatActivity() {
             viewModel.initPlayer(binding.player)
         }
 
-        launchMain {
+        launchUI {
             viewModel.products.collect { products ->
                 adapter.products = products
                 var endId = if (isTappedState) R.id.state_tapped_normal else R.id.state_normal
@@ -140,18 +140,18 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        launchMain {
+        launchUI {
             viewModel.onLoading.collect { isLoading ->
                 binding.playerLoading.animateAlpha(if (isLoading) ALPHA_VISIBLE else ALPHA_GONE)
                 binding.player.animateAlpha(if (isLoading) ALPHA_GONE else ALPHA_VISIBLE)
             }
         }
-        launchMain {
+        launchUI {
             viewModel.onSizeChanged.collect { size ->
                 binding.player.zoomToFit(size)
             }
         }
-        launchMain {
+        launchUI {
             viewModel.onError.collect { error ->
                 binding.root.showSnackBar(error.message)
             }
@@ -208,7 +208,7 @@ class MainActivity : AppCompatActivity() {
                         binding.playerView.height
                     ))
                     anchorType = anchorPoint.type
-                    launchMain {
+                    launchUI {
                         delay(50L)
                         binding.playerView.animate()
                             .x(anchorPoint.x)
@@ -230,7 +230,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun updatePlayerState() = launchMain {
+    private fun updatePlayerState() = launchUI {
         delay(ANIMATION_DURATION)
         val x = binding.playerView.x
         val y = binding.playerView.y
