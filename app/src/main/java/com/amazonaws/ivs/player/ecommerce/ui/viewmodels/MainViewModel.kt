@@ -10,8 +10,7 @@ import com.amazonaws.ivs.player.Player
 import com.amazonaws.ivs.player.ecommerce.BuildConfig
 import com.amazonaws.ivs.player.ecommerce.common.*
 import com.amazonaws.ivs.player.ecommerce.models.*
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import timber.log.Timber
 
 class MainViewModel(products: ProductsModel) : ViewModel() {
@@ -21,15 +20,15 @@ class MainViewModel(products: ProductsModel) : ViewModel() {
 
     private val rawProducts = mutableListOf<ProductModel>()
     private val metadata = mutableListOf<String>()
-    private val _onError = MutableSharedFlow<ErrorModel>(replay = 1)
-    private val _onSizeChanged = MutableSharedFlow<SizeModel>(replay = 1)
-    private val _onLoading = MutableSharedFlow<Boolean>(replay = 1)
-    private val _products = MutableSharedFlow<List<ProductModel>>(replay = 1)
+    private val _products = ConsumableSharedFlow<List<ProductModel>>(canReplay = true)
+    private val _onSizeChanged = ConsumableSharedFlow<SizeModel>(canReplay = true)
+    private val _onError = ConsumableSharedFlow<ErrorModel>()
+    private val _onLoading = ConsumableSharedFlow<Boolean>()
 
-    val onError: SharedFlow<ErrorModel> = _onError
-    val onSizeChanged: SharedFlow<SizeModel> = _onSizeChanged
-    val onLoading: SharedFlow<Boolean> = _onLoading
-    val products: SharedFlow<List<ProductModel>> = _products
+    val onError = _onError.asSharedFlow()
+    val onSizeChanged = _onSizeChanged.asSharedFlow()
+    val onLoading = _onLoading.asSharedFlow()
+    val products = _products.asSharedFlow()
 
     val playerSize get() = _onSizeChanged.replayCache.lastOrNull()
     val isShowingProduct get() = _products.replayCache.lastOrNull()?.any { it.isSelected } ?: false
