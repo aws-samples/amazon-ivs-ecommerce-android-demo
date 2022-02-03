@@ -15,7 +15,6 @@ import com.amazonaws.ivs.player.ecommerce.models.PlayerParams
 import com.amazonaws.ivs.player.ecommerce.ui.adapters.ProductsAdapter
 import com.amazonaws.ivs.player.ecommerce.ui.viewmodels.MainViewModel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import timber.log.Timber
 import java.util.*
 
