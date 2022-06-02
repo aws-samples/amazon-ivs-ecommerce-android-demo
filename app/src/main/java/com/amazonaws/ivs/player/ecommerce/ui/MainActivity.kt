@@ -16,7 +16,6 @@ import com.amazonaws.ivs.player.ecommerce.ui.adapters.ProductsAdapter
 import com.amazonaws.ivs.player.ecommerce.ui.viewmodels.MainViewModel
 import kotlinx.coroutines.delay
 import timber.log.Timber
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
