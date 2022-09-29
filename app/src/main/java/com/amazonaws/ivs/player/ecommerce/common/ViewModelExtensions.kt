@@ -10,13 +10,13 @@ inline fun <reified T : ViewModel> lazyViewModel(
 ) =
     lazy {
         if (creator == null)
-            ViewModelProvider(owner()).get(T::class.java)
+            ViewModelProvider(owner())[T::class.java]
         else
-            ViewModelProvider(owner(), BaseViewModelFactory(creator)).get(T::class.java)
+            ViewModelProvider(owner(), BaseViewModelFactory(creator))[T::class.java]
     }
 
 class BaseViewModelFactory<T>(val creator: () -> T) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")
         return creator() as T
     }

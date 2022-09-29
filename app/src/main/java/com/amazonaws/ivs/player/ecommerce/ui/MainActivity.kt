@@ -2,6 +2,7 @@ package com.amazonaws.ivs.player.ecommerce.ui
 
 import android.os.Bundle
 import android.view.MotionEvent
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
@@ -154,14 +155,16 @@ class MainActivity : AppCompatActivity() {
                 binding.root.showSnackBar(error.message)
             }
         }
-    }
 
-    override fun onBackPressed() {
-        if (isShowingStreams) {
-            restorePlayerView()
-        } else {
-            super.onBackPressed()
-        }
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (isShowingStreams) {
+                    restorePlayerView()
+                } else {
+                    finish()
+                }
+            }
+        })
     }
 
     override fun onPause() {
