@@ -47,7 +47,7 @@ android {
 dependencies {
     // Android
     api 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.appcompat:appcompat:1.6.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.android.material:material:1.7.0'
 
@@ -55,7 +55,7 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1'
     
     // Amazon
-    implementation 'com.amazonaws:ivs-player:1.14.0'
+    implementation 'com.amazonaws:ivs-player:1.16.0'
 
     // Coroutines
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
