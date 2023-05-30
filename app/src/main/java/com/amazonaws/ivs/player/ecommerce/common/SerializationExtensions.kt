@@ -1,6 +1,5 @@
 package com.amazonaws.ivs.player.ecommerce.common
 
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
 val json = Json {
