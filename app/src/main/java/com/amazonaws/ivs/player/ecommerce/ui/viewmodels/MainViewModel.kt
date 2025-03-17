@@ -1,15 +1,22 @@
 package com.amazonaws.ivs.player.ecommerce.ui.viewmodels
 
-import android.net.Uri
 import android.view.Surface
 import android.view.TextureView
+import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import com.amazonaws.ivs.player.MediaPlayer
 import com.amazonaws.ivs.player.MediaType
 import com.amazonaws.ivs.player.Player
 import com.amazonaws.ivs.player.ecommerce.BuildConfig
-import com.amazonaws.ivs.player.ecommerce.common.*
-import com.amazonaws.ivs.player.ecommerce.models.*
+import com.amazonaws.ivs.player.ecommerce.common.METADATA_TIMEOUT
+import com.amazonaws.ivs.player.ecommerce.common.asObject
+import com.amazonaws.ivs.player.ecommerce.common.onTick
+import com.amazonaws.ivs.player.ecommerce.common.setListener
+import com.amazonaws.ivs.player.ecommerce.models.ErrorModel
+import com.amazonaws.ivs.player.ecommerce.models.MetadataModel
+import com.amazonaws.ivs.player.ecommerce.models.ProductModel
+import com.amazonaws.ivs.player.ecommerce.models.ProductsModel
+import com.amazonaws.ivs.player.ecommerce.models.SizeModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -50,7 +57,7 @@ class MainViewModel @Inject constructor(products: ProductsModel) : ViewModel() {
 
     fun initPlayer(textureView: TextureView) {
         _onLoading.update { true }
-        player = MediaPlayer(textureView.context)
+        player = MediaPlayer.Builder(textureView.context).build()
         player?.setListener(
             onVideoSizeChanged = { width, height ->
                 Timber.d("Video size changed: $width $height")
@@ -79,7 +86,7 @@ class MainViewModel @Inject constructor(products: ProductsModel) : ViewModel() {
             }
         )
         player?.setSurface(Surface(textureView.surfaceTexture))
-        player?.load(Uri.parse(BuildConfig.BASE_STREAM_URL))
+        player?.load(BuildConfig.BASE_STREAM_URL.toUri())
         player?.play()
     }
 
