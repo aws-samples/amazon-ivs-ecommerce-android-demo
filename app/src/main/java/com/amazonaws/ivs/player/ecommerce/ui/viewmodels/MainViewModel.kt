@@ -47,7 +47,7 @@ class MainViewModel @Inject constructor(products: ProductsModel) : ViewModel() {
     val products = _products.asSharedFlow()
 
     val playerSize get() = _onSizeChanged.replayCache.lastOrNull()
-    val isShowingProduct get() = _products.replayCache.lastOrNull()?.any { it.isSelected } ?: false
+    val isShowingProduct get() = _products.replayCache.lastOrNull()?.any { it.isSelected } == true
     val hasProductToSelect get() = metadata.isNotEmpty()
 
     init {
