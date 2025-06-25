@@ -9,12 +9,12 @@ plugins {
 
 android {
     namespace = "com.amazonaws.ivs.player.ecommerce"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.amazonaws.ivs.player.ecommerce"
         minSdk = 23
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 

@@ -29,8 +29,9 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(products: ProductsModel) : ViewModel() {
-
+class MainViewModel @Inject constructor(
+    products: ProductsModel,
+) : ViewModel() {
     private var player: MediaPlayer? = null
     private var playerListener: Player.Listener? = null
 
