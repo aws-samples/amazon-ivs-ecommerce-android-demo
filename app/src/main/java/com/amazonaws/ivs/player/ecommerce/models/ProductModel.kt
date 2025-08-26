@@ -15,8 +15,8 @@ data class ProductModel(
     @Transient var timeLeft: Int = -1
 ) {
     val isSelected get() = timeLeft >= 0
-    val oldPrice get() = "\$$price"
-    val newPrice get() = "\$$discountedPrice"
+    val oldPrice get() = "$$price"
+    val newPrice get() = "$$discountedPrice"
     val isDiscounted get() = price != discountedPrice
     val timer: String get() = "0:${if (timeLeft > 9) "$timeLeft" else if (timeLeft >= 0) "0$timeLeft" else "00" }"
 
@@ -44,6 +44,4 @@ data class ProductModel(
         result = 31 * result + longDescription.hashCode()
         return result
     }
-
-
 }
